@@ -1,0 +1,57 @@
+{
+  "name": "coims",
+  "authors": [
+    "joyFactory"
+  ],
+  "description": "coims bower",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower-components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.6.3",
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0",
+    "angular-ui-router": "^0.4.2"
+  },
+  "install": {
+    "path": {
+      "css": "src/main/resources/static/css",
+      "js": "src/main/resources/static/lib",
+      "eot": "src/main/resources/static/fonts",
+      "svg": "src/main/resources/static/fonts",
+      "ttf": "src/main/resources/static/fonts",
+      "woff": "src/main/resources/static/fonts"
+    },
+    "sources": {
+      "angular": [
+        "bower-components/angular/angular.min.js",
+        "bower-components/angular-ui-router/release/angular-ui-router.min.js"
+      ],
+      "bootstrap": [
+        "bower-components/jquery/dist/jquery.min.js",
+        "bower-components/bootstrap/dist/js/bootstrap.min.js",
+        "bower-components/bootstrap/dist/css/bootstrap.css"
+      ],
+      "font-awesome": [
+        "bower-components/font-awesome/css/font-awesome.min.css",
+        "bower-components/font-awesome/fonts/fontawesome-webfont.woff",
+        "bower-components/font-awesome/fonts/fontawesome-webfont.woff2",
+        "bower-components/font-awesome/fonts/fontawesome-webfont.ttf"
+      ],
+      "angular-ui-router": [
+        ""
+      ],
+      "jquery": [
+        ""
+      ]
+    }
+  }
+}
