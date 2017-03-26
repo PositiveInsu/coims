@@ -49,11 +49,11 @@ task greet(type:Exec) {
     commandLine 'gradle -q printProperties'
 }
 
-if( "$deployServer" == "test") {
-	task copyJarToDeployFolder() {
-		copy {
-			from "build/libs/$projectName-${version}.jar"
-			into "/usr/local/coims/"
-		}
-	}
-}
+//if( "$deployServer" == "test") {
+//	task copyJarToDeployFolder() {
+//		copy {
+//			from "build/libs/$projectName-${version}.jar"
+//			into "/usr/local/coims/"
+//		}
+//	}
+//}
