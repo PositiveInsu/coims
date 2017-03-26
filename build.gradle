@@ -15,20 +15,12 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'war'
-
-version = '0.0.1'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-}
-
-war {
-	baseName = 'coims'
-	version =  "$version"
 }
 
 idea {
@@ -57,3 +49,11 @@ task greet(type:Exec) {
     commandLine 'gradle -q printProperties'
 }
 
+if( "$deployServer" == "test") {
+	task copyJarToDeployFolder() {
+		copy {
+			from "build/libs/$projectName-${version}.jar"
+			into "/usr/local/coims/"
+		}
+	}
+}

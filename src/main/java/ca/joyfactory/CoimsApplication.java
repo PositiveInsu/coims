@@ -2,16 +2,9 @@ package ca.joyfactory;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.web.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class CoimsApplication extends SpringBootServletInitializer {
-
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-        return builder.sources(CoimsApplication.class);
-    }
+public class CoimsApplication{
 
     public static void main(String[] args) {
 		SpringApplication.run(CoimsApplication.class, args);
