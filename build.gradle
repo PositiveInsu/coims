@@ -47,3 +47,7 @@ task greet(type:Exec) {
     commandLine 'gradle -q printProperties'
 }
 
+//task copyJarToDeployFolder(type: Copy) {
+//    from 'build/libs/coims-0.0.1.jar'
+//    into "/usr/local/coims/" 
+//}
