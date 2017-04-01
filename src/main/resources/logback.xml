@@ -1,5 +1,4 @@
-<!-- -Dlogback.configurationFile=/path/to/config.xml-->
-
+<?xml version="1.0" encoding="UTF-8"?>
 <configuration>
     <property name="LOG_HOME" value="log" />
 
@@ -9,15 +8,6 @@
         <encoder>
             <pattern>%-4relative %d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
-    </appender>
-
-    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
-        <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
-            <layout class="ch.qos.logback.classic.html.HTMLLayout">
-                <pattern>%relative%thread%mdc%level%logger%msg</pattern>
-            </layout>
-        </encoder>
-        <file>${LOG_HOME}/test.html</file>
     </appender>
 
     <root level="info">
