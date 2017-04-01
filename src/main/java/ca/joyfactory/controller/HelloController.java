@@ -1,5 +1,9 @@
 package ca.joyfactory.controller;
 
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.core.util.StatusPrinter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,9 +17,14 @@ import java.util.UUID;
  */
 @RestController
 public class HelloController {
+    Logger logger = LoggerFactory.getLogger( HelloController.class);
 
     @RequestMapping("/resource")
     public Map<String,Object> home() {
+        logger.debug("[Restfull] call /resource");
+        LoggerContext li = (LoggerContext)LoggerFactory.getILoggerFactory();
+        StatusPrinter.print(li);
+
         Map<String,Object> model = new HashMap<String,Object>();
         model.put("id", UUID.randomUUID().toString());
         model.put("content", "Hello World");
