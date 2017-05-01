@@ -15,12 +15,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'war'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+    jcenter()
 }
 
 idea {
@@ -46,8 +48,3 @@ task bowerInstaller(type:Exec) {
 task greet(type:Exec) {
     commandLine 'gradle -q printProperties'
 }
-
-//task copyJarToDeployFolder(type: Copy) {
-//    from 'build/libs/coims-0.0.1.jar'
-//    into "/usr/local/coims/" 
-//}

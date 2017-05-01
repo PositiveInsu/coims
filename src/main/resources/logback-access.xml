@@ -1,0 +1,52 @@
+<configuration>
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+            <evaluator>
+                <expression>event.getStatusCode() == 404</expression>
+            </evaluator>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>%h %l %u %user %date "%r" %s %b</pattern>
+        </encoder>
+    </appender>
+
+    <appender-ref ref="STDOUT" />
+</configuration>
+
+
+<!--
+
+<configuration>
+&lt;!&ndash; always a good activate OnConsoleStatusListener &ndash;&gt;
+<statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener" />
+
+<appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>log/access/coims.html</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+        &lt;!&ndash; rollover daily &ndash;&gt;
+        <fileNamePattern>log/access/%d{yyyy-MM,aux}/coims-%d{yyyy-MM-dd}.%i.html.zip</fileNamePattern>
+        <maxFileSize>100MB</maxFileSize>
+        <maxHistory>8</maxHistory>
+        <totalSizeCap>20GB</totalSizeCap>
+    </rollingPolicy>
+    <filter class="ch.qos.logback.core.filter.EvaluatorFilter">
+        <evaluator>
+            <expression>
+                event.getStatusCode() == 404
+            </expression>
+        </evaluator>
+        <onMismatch>DENY</onMismatch>
+    </filter>
+    <encoder class="ch.qos.logback.core.encoder.LayoutWrappingEncoder">
+        <layout class="ch.qos.logback.classic.html.HTMLLayout">
+            <pattern>%h %l %u %user %date "%r" %s %b</pattern>
+        </layout>
+    </encoder>
+</appender>
+
+
+<appender-ref ref="ROLLING" />
+</configuration>-->
