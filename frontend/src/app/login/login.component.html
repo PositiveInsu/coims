@@ -1,0 +1,59 @@
+<div id="wrap">
+  <div class="container">
+    <div class="form-login">
+      <form>
+        <div class="header">
+          <h2><img [src]="coimsLogo" alt=""></h2>
+          <h4>Online Immigration Management System</h4>
+        </div>
+
+        <div class="info">
+          <label for="inputEmail" class="sr-only">Email address</label>
+          <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Email address" required="" autofocus="">
+          <div class="notice" style="display:none">Enter your E-mail</div>
+          <label for="inputPassword" class="sr-only">Password</label>
+          <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Password" required="">
+          <div class="notice" style="display:none">The Toy system ID and password do not match. Please try again.</div>
+          <div class="notice" style="display:none">Enter your password</div>
+          <div class="notice" style="display:none">The password is too short.</div>
+          <div class="row checkbox login-checkbox">
+            <div class="col-md-6 ">
+              <label>
+                <input type="checkbox" value="remember-me"> Remember me
+              </label>
+            </div>
+            <div class="col-md-6 text-right">
+              <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">
+                Forgot ID / Password
+              </a>
+            </div>
+            <div class="modal fade center" id="myModal" tabindex="-1" role="dialog">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h3 class="modal-title">Forgot password?</h3>
+                  </div>
+                  <div class="modal-body">
+                    <p class="pdb_20">Enter the email address associated with your account.<br> We’ll email you instructions on how to log in.</p>
+                    <label for="inputForgotId" class="sr-only">ID (E-mail)</label>
+                    <input type="text" id="inputForgotId" class="form-control input-lg" placeholder="ID (E-mail)" required="" autofocus="">
+
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-lg">Send</button>
+                    <div class="pdt_10">
+                      <a href="#">Forgot your ID?</a>
+                    </div>
+                  </div>
+                </div><!-- /.modal-content -->
+              </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+          </div>
+          <button class="btn btn-primary btn-block btn-lg" type="submit">Log in</button>
+          <button class="btn btn-default btn-block btn-lg" type="submit">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

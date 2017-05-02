@@ -3,9 +3,11 @@
  */
 import {Component} from "@angular/core";
 @Component({
-  selector:'login',
+  selector:'coims-login',
   templateUrl: './login.component.html'
 })
 export class LoginComponent{
+  private coimsLogo = '/assets/images/logo.png';
 
+  constructor() {}
 }
