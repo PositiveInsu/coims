@@ -22,16 +22,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         logger.info( "Security Config Class");
+
         http
-                .csrf()
-                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
-                    .and()
-                .httpBasic()
-                    .and()
-                .authorizeRequests()
-                    .antMatchers("/css/**", "/js/**", "/libs/**", "/html/**").permitAll()
-                    .antMatchers( "/", "/index.html").permitAll()
-                    .anyRequest().authenticated();
+            .authorizeRequests()
+                .antMatchers("/", "/*.js", "/*.map", "/assets/**").permitAll()
+                .anyRequest().denyAll()
+                .and()
+            .formLogin()
+                .loginPage("/");
+
+
+//                .csrf()
+//                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+//                    .and()
+//                .httpBasic()
+//                    .and()
+//                .authorizeRequests()
+//                    .antMatchers("/css/**", "/js/**", "/libs/**", "/html/**").permitAll()
+//                    .antMatchers( "/", "/login", "/index.html").permitAll()
+//                    .anyRequest().anonymous();
 
         super.configure(http);
     }

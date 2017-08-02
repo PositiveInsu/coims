@@ -1,0 +1,44 @@
+<div [formGroup]="_personalInfoForm">
+  <div [ngClass]="{ 'has-error': _fName.touched && !_fName.valid}">
+    <label for="inputFirstname" class="sr-only">First Name </label>
+    <input type="text" id="inputFirstname" class="form-control input-lg" placeholder="First Name" formControlName="fName" [ngModel]="_consultantObj.fname" (focus)="_fName.markAsUntouched()" autofocus>
+    <div class="notice" *ngIf="_fName.touched && _fName.getError('required')">Enter your First Name.</div>
+    <div class="notice" *ngIf="_fName.getError('pattern')">Please type only english</div>
+  </div>
+  <div [ngClass]="{ 'has-error': _lName.touched && !_lName.valid}">
+    <label for="inputLastname" class="sr-only">Last Name</label>
+    <input type="text" id="inputLastname" class="form-control input-lg" placeholder="Last Name" formControlName="lName" [ngModel]="_consultantObj.lname" (focus)="_lName.markAsUntouched()">
+    <div class="notice" *ngIf="_lName.touched && _lName.getError('required')">Enter your Last Name.</div>
+    <div class="notice" *ngIf="_lName.getError('pattern')">Please type only English</div>
+  </div>
+  <div [ngClass]="{ 'has-error': _email.touched && !_email.valid}">
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Email address" formControlName="email" [(ngModel)]="_consultantObj.email" (focus)="_email.markAsUntouched()">
+    <div class="notice" *ngIf="_email.touched && _email.getError('required')">Enter your Email</div>
+    <div class="notice" *ngIf="_email.getError('pattern')">Email format should be <i>jade@abc.com</i>.</div>
+  </div>
+  <div [ngClass]="{ 'has-error': _password.touched && !_password.valid}">
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Password" formControlName="password" (input)="_consultantObj.password = $event.target.value" (focus)="_password.markAsUntouched()">
+    <div class="notice" *ngIf="_password.touched && _password.getError('required')">Enter your Password</div>
+    <div class="notice" *ngIf="_password.getError('password')">{{_password.getError('password').message}}</div>
+  </div>
+  <div [ngClass]="{ 'has-error': _rePassword.touched && !_rePassword.valid}">
+    <label for="inputReenter" class="sr-only">Re-enter Password</label>
+    <input type="password" id="inputReenter" class="form-control input-lg" placeholder="Re-enter Password" formControlName="rePassword" (focus)="_rePassword.markAsUntouched()">
+    <div class="notice" *ngIf="_rePassword.touched && _rePassword.getError('required')">Enter your Password</div>
+    <div class="notice"*ngIf="_rePassword.touched && _rePassword.getError('equalPassword')">{{ _rePassword.getError('equalPassword').message}}</div>
+  </div>
+  <div class="agreement checkbox">
+    <label>
+      <input type="checkbox" value="read-policy" formControlName="agreement">
+      <span>
+        I have read and agree to the <a href="#">Terms of Service</a>, <a href="#">Nondiscrimination Policy</a>, <a href="#">Payments Terms of Service</a>, <a href="#">Privacy Policy</a>.
+      </span>
+    </label>
+  </div>
+  <div class="text-center signup-btn">
+    <a class="btn btn-default btn-lg" [routerLink]="['/login']">Back</a>
+    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': _personalInfoForm.valid && _agreement.value? false : true}" [routerLink]="['/signup/step2']">Next</a>
+  </div>
+</div>

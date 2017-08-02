@@ -35,4 +35,9 @@ public class HelloController {
     public Principal user(Principal user) {
         return user;
     }
+
+    @RequestMapping("/login")
+    public void test(){
+        System.out.println( "login insert!");
+    }
 }

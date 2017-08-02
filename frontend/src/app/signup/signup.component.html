@@ -1,0 +1,22 @@
+<div id="wrap">
+  <div class="container">
+    <div class="form-login signup">
+      <div class="header">
+        <h2><img [src]="config.coimsLogoUrl" alt=""></h2>
+        <h4>Online Immigration Management System</h4>
+      </div>
+      <div class="info">
+        <div class="signup-top">
+          <div class="signup-steps">
+            <progressbar class="progress-striped active" [value]="signupService.progressBarObj.currentStepPercentage" [max]="100"></progressbar>
+            <p class="steps-txt"><strong>Step {{signupService.progressBarObj.currentStep}}</strong> -
+              {{signupService.progressBarObj.currentStepName}}</p>
+          </div>
+        </div>
+        <form name="form">
+          <router-outlet></router-outlet>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
