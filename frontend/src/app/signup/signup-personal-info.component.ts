@@ -1,6 +1,4 @@
 import {Component, OnInit}                  from "@angular/core";
-import {Router}                             from "@angular/router";
-import {Location}                           from "@angular/common";
 import {FormGroup, Validators, FormBuilder, FormControl, ValidatorFn, AbstractControl} from "@angular/forms";
 
 import {SignupService}            from "../_service/signup.service";
@@ -27,7 +25,8 @@ export class SignupPersonalInfoComponent implements OnInit{
   private _rePassword: FormControl;
   private _agreement: FormControl;
 
-  constructor( private signupService: SignupService, private router: Router, private location: Location, private fb:FormBuilder){}
+  constructor( private signupService: SignupService,
+               private fb:FormBuilder){}
 
   ngOnInit(): void {
     this.initProgressBar();
@@ -88,5 +87,13 @@ export class SignupPersonalInfoComponent implements OnInit{
 
       return result ? resultObj : null;
     };
+  }
+
+  private checkHasError( formControlObj:FormControl): boolean{
+    return formControlObj.touched && !formControlObj.valid;
+  }
+
+  private checkEmptyValue( formControlObj:FormControl): boolean{
+    return formControlObj.touched && formControlObj.getError('required');
   }
 }
