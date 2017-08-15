@@ -21,7 +21,8 @@ export class SignupVerificationComponent{
   // private _lawyerNo: FormControl;
 
   constructor( private signupService: SignupService,
-               private fb:FormBuilder){
+               private fb:FormBuilder,
+               private router: Router){
     this.initProgressBar();
     this.checkConsultantObj();
     this.initConsultantObj();
@@ -55,13 +56,5 @@ export class SignupVerificationComponent{
 
   private checkEmptyValue( formControlObj:FormControl): boolean{
     return formControlObj.touched && formControlObj.getError('required');
-  }
-
-  private previousStep(){
-    return '/signup/step' + (this.signupService.progressBarObj.currentStep - 1);
-  }
-
-  private nextStep(){
-    return '/signup/step' + (this.signupService.progressBarObj.currentStep + 1);
   }
 }

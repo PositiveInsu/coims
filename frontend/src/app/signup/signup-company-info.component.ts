@@ -5,6 +5,7 @@ import {CountryService, Country, Province}   from "../_service/country.service";
 import {SignupValidator} from "../_validator/signup.validator";
 import {Consultant} from "../_model/consultant";
 import {Company} from "../_model/company";
+import {Router} from "@angular/router";
 
 
 /**
@@ -36,7 +37,8 @@ export class SignupCompanyInfoComponent{
 
   constructor( private signupService: SignupService,
                private countryService: CountryService,
-               private fb:FormBuilder){
+               private fb:FormBuilder,
+               private router: Router){
 
     this._countries = this.countryService.countries;
     this._provinces = this.countryService.provinces;
@@ -54,7 +56,6 @@ export class SignupCompanyInfoComponent{
   }
 
   private initConsultantObj() {
-    console.log( this.signupService);
     this._consultantObj = this.signupService.consultantObj;
     this._companyObj = this._consultantObj.company;
   }
@@ -91,13 +92,5 @@ export class SignupCompanyInfoComponent{
 
   private checkEmptyValue( formControlObj:FormControl): boolean{
     return formControlObj.touched && formControlObj.getError('required');
-  }
-
-  private previousStep(){
-    return '/signup/step' + (this.signupService.progressBarObj.currentStep - 1);
-  }
-
-  private nextStep(){
-    return '/signup/step' + (this.signupService.progressBarObj.currentStep + 1);
   }
 }

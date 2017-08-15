@@ -48,8 +48,7 @@
   <label for="inputFax" class="sr-only">Fax (optional)</label>
   <input type="text" id="inputFax" class="form-control input-lg" [(ngModel)]="_companyObj.fax" placeholder="Fax (optional)" formControlName="fax">
   <div class="text-center signup-btn">
-    <a class="btn btn-default btn-lg" [routerLink]="[previousStep()]">Back</a>
-    <!--<a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_companyInfoForm.valid}" [routerLink]="[nextStep()]">Next</a>-->
-    <a class="btn btn-primary btn-lg" [routerLink]="[nextStep()]">Next</a>
+    <a class="btn btn-default btn-lg" (click)="signupService.previousStep( router)">Back</a>
+    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_companyInfoForm.valid}" (click)="signupService.nextStep( router)">Next</a>
   </div>
 </div>

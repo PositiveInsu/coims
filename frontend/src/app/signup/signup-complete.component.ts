@@ -3,6 +3,7 @@
  */
 import {Component}        from "@angular/core";
 import {SignupService}    from "../_service/signup.service";
+import {Router} from "@angular/router";
 @Component({
   selector: 'coims-signup-complete',
   styleUrls: ['./signup-complete.component.css'],
@@ -10,7 +11,8 @@ import {SignupService}    from "../_service/signup.service";
 })
 export class SignupCompleteComponent{
 
-  constructor(private signupService: SignupService){
+  constructor(private signupService: SignupService,
+              private router: Router){
     this.initProgressBar();
     this.deleteConsultantObj();
   }
@@ -24,12 +26,5 @@ export class SignupCompleteComponent{
     if( this.signupService.isNullConsultantObj){
       this.signupService.deleteConsultantObj();
     }
-  }
-
-  private goLoginPage(){
-    if( this.signupService.isNullConsultantObj){
-      this.signupService.deleteConsultantObj();
-    }
-    return '/login';
   }
 }
