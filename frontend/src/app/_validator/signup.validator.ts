@@ -2,10 +2,12 @@ import {FormControl, ValidatorFn, AbstractControl} from "@angular/forms";
 /**
  * Created by Joinsu on 2017-05-22.
  */
-export class SigninValidator{
+export class SignupValidator{
 
   static uppercaseNameRegExp = '[A-Z]{1,15}';
   static emailRegExp = '[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}';
+  static phoneNoRegExp = '[0-9]{3}-[0-9]{3}-[0-9]{4}';
+  static iccrcNoRegExp = '^R[0-9]{6}';
 
   static password( control: FormControl){
 

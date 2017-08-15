@@ -7,7 +7,17 @@ export class Consultant{
   private _lname: string;
   private _email: string;
   private _password: string;
+  private _memberId: string;
+
   private _company: Company;
+
+  get memberId(): string {
+    return this._memberId;
+  }
+
+  set memberId(value: string) {
+    this._memberId = value;
+  }
 
   get fname(): string {
     return this._fname;
