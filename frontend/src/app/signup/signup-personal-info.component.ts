@@ -2,8 +2,9 @@ import {Component, OnInit}                  from "@angular/core";
 import {FormGroup, Validators, FormBuilder, FormControl, ValidatorFn, AbstractControl} from "@angular/forms";
 
 import {SignupService}            from "../_service/signup.service";
-import {SigninValidator}          from "../_validator/signin.validator";
+import {SignupValidator}          from "../_validator/signup.validator";
 import {Consultant}               from "../_model/consultant";
+import {Router} from "@angular/router";
 
 
 
@@ -26,7 +27,8 @@ export class SignupPersonalInfoComponent implements OnInit{
   private _agreement: FormControl;
 
   constructor( private signupService: SignupService,
-               private fb:FormBuilder){}
+               private fb:FormBuilder,
+               private router: Router){}
 
   ngOnInit(): void {
     this.initProgressBar();
@@ -47,15 +49,15 @@ export class SignupPersonalInfoComponent implements OnInit{
   }
 
   private initForm() {
-    this._fName = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SigninValidator.uppercaseNameRegExp)]));
+    this._fName = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SignupValidator.uppercaseNameRegExp)]));
     this._fName.valueChanges.subscribe( data => data ? this._consultantObj.fname = data.toUpperCase() : '' );
 
-    this._lName = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SigninValidator.uppercaseNameRegExp)]));
+    this._lName = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SignupValidator.uppercaseNameRegExp)]));
     this._lName.valueChanges.subscribe( data => data ? this._consultantObj.lname = data.toUpperCase() : '' );
 
-    this._email = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SigninValidator.emailRegExp)]));
+    this._email = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SignupValidator.emailRegExp)]));
 
-    this._password = new FormControl( '', Validators.compose([ Validators.required, SigninValidator.password]));
+    this._password = new FormControl( '', Validators.compose([ Validators.required, SignupValidator.password]));
     this._rePassword = new FormControl( '', Validators.compose([ Validators.required, this.equalPassword()]));
     this._agreement = new FormControl( '', Validators.required);
 
@@ -68,7 +70,7 @@ export class SignupPersonalInfoComponent implements OnInit{
       agreement: this._agreement
     });
   }
-
+// refactoring 다른곳에서도 쓰일수 있을 함수
   private equalPassword(): ValidatorFn{
     return (control: AbstractControl): {[key: string]: any} => {
       let value: string = control.value;

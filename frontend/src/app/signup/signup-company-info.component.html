@@ -1,48 +1,55 @@
 <div [formGroup]="_companyInfoForm">
-  <div [ngClass]="{ 'has-error': _cName.touched && !_cName.valid}">
+  <div [ngClass]="{ 'has-error': checkHasError(_cName)}">
     <label for="inputCname" class="sr-only">Company Name</label>
-    <input type="text" id="inputCname" class="form-control input-lg" placeholder="Company Name" formControlName="cName" (focus)="_cName.markAsUntouched()" autofocus>
-    <div class="notice" *ngIf="_cName.touched && _cName.getError('required')">Enter your Company Name.</div>
+    <input type="text" id="inputCname" class="form-control input-lg" [(ngModel)]="_companyObj.name" placeholder="Company Name" formControlName="cName" (focus)="_cName.markAsUntouched()" autofocus>
+    <div class="notice" *ngIf="checkEmptyValue(_cName)">Enter your company name.</div>
   </div>
   <label for="inputCountry" class="sr-only">Country</label>
-  <select class="form-control input-lg" id="inputCountry">
-    <option *ngFor="let country of _countries" value="{{country.code}}">{{country.name}}</option>
+  <select class="form-control input-lg" id="inputCountry" [(ngModel)]="_companyObj.country" formControlName="country">
+    <option *ngFor="let country of _countries" [value]="country.code">{{country.name}}</option>
   </select>
-  <div [ngClass]="{ 'has-error': _sAddress.touched && !_sAddress.valid}">
+  <div [ngClass]="{ 'has-error': checkHasError(_street)}">
     <label for="inputSAddress" class="sr-only">Street Address</label>
-    <input type="text" id="inputSAddress" class="form-control input-lg" placeholder="Street Address (e.g. 108 Avenue)" formControlName="sAddress" (focus)="_sAddress.markAsUntouched()">
-    <div class="notice" *ngIf="_sAddress.touched && _sAddress.getError('required')">Enter your Street Address.</div>
+    <input type="text" id="inputSAddress" class="form-control input-lg" [(ngModel)]="_companyObj.street" placeholder="Street Address (e.g. 108 Avenue)" formControlName="street" (focus)="_street.markAsUntouched()">
+    <div class="notice" *ngIf="checkEmptyValue(_street)">Enter your street address.</div>
   </div>
-  <label for="inputCity" class="sr-only">City</label>
-  <input type="text" id="inputCity" class="form-control input-lg" placeholder="Town/City" required="">
-  <div class="notice" style="display:none">Enter your City</div>
+  <div [ngClass]="{ 'has-error': checkHasError(_city)}">
+    <label for="inputCity" class="sr-only">City</label>
+    <input type="text" id="inputCity" class="form-control input-lg" [(ngModel)]="_companyObj.city" placeholder="Town/City" formControlName="city" (focus)="_city.markAsUntouched()">
+    <div class="notice" *ngIf="checkEmptyValue(_city)">Enter your city.</div>
+  </div>
   <div class="row">
     <div class="col-md-6">
       <label class="sr-only">Province</label>
-      <select class="form-control input-lg" id="inputProvince" >
-        <option *ngFor="let province of _provinces" value="{{province.code}}">{{province.name}}</option>
+      <select class="form-control input-lg" id="inputProvince" [(ngModel)]="_companyObj.province" formControlName="province">
+        <option *ngFor="let province of _provinces" [value]="province.code">{{province.name}}</option>
       </select>
     </div>
-    <div class="col-md-6" style="font-size: 10px">
+    <div class="col-md-6" style="font-size: 10px" [ngClass]="{ 'has-error': checkHasError( _postal)}">
       <label class="sr-only">Postal Code</label>
-      <input type="text" id="inputPostal" class="form-control input-lg" placeholder="Postal Code" required="">
+      <input type="text" id="inputPostal" class="form-control input-lg" [(ngModel)]="_companyObj.postal" placeholder="Postal Code" formControlName="postal" (focus)="_postal.markAsUntouched()">
+      <div class="notice" style="font-size: 16px" *ngIf="checkEmptyValue(_postal)">Enter your postal code.</div>
     </div>
   </div>
-  <label for="inputPhone" class="sr-only">Company Phone</label>
-  <input type="text" id="inputPhone" class="form-control input-lg" placeholder="Company Phone" required="">
-  <div class="notice" style="display:none">Enter your Company Phone</div>
-  <label for="inputCemail" class="sr-only">Company E-mail</label>
-  <input type="text" id="inputCemail" class="form-control input-lg" placeholder="Company E-mail" required="">
-  <div class="notice" style="display:none">Enter your Company E-mail</div>
+  <div [ngClass]="{ 'has-error': checkHasError(_cPhone)}">
+    <label for="inputPhone" class="sr-only">Company Phone</label>
+    <input type="text" id="inputPhone" class="form-control input-lg" [(ngModel)]="_companyObj.phone" placeholder="Company Phone (e.g. 123-456-7890)" formControlName="cPhone" (focus)="_cPhone.markAsUntouched()">
+    <div class="notice" *ngIf="checkEmptyValue(_cPhone)">Enter your company phone number.</div>
+    <div class="notice" *ngIf="_cPhone.getError('pattern')">Phone No format should be <i>123-456-7890</i></div>
+  </div>
+  <div [ngClass]="{ 'has-error': checkHasError(_cEmail)}">
+    <label for="inputCemail" class="sr-only">Company E-mail</label>
+    <input type="text" id="inputCemail" class="form-control input-lg" [(ngModel)]="_companyObj.email" placeholder="Company E-mail" formControlName="cEmail" (focus)="_cEmail.markAsUntouched()">
+    <div class="notice" *ngIf="checkEmptyValue(_cEmail)">Enter your company E-mail.</div>
+    <div class="notice" *ngIf="_cEmail.getError('pattern')">Email format should be <i>jade@abc.com</i>.</div>
+  </div>
   <label for="inputWebsite" class="sr-only">Website (optional)</label>
-  <input type="text" id="inputWebsite" class="form-control input-lg" placeholder="Website (optional)" required="">
+  <input type="text" id="inputWebsite" class="form-control input-lg" [(ngModel)]="_companyObj.website" placeholder="Website (optional)" formControlName="website">
   <label for="inputFax" class="sr-only">Fax (optional)</label>
-  <input type="text" id="inputFax" class="form-control input-lg" placeholder="Fax (optional)" required="">
+  <input type="text" id="inputFax" class="form-control input-lg" [(ngModel)]="_companyObj.fax" placeholder="Fax (optional)" formControlName="fax">
   <div class="text-center signup-btn">
-    <button type="button" class="btn btn-default btn-lg" (click)="goPreviousPage()">Back</button>
-    <button type="button" class="btn btn-primary btn-lg" (click)="goNextPage()">Next</button>
+    <a class="btn btn-default btn-lg" [routerLink]="[previousStep()]">Back</a>
+    <!--<a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_companyInfoForm.valid}" [routerLink]="[nextStep()]">Next</a>-->
+    <a class="btn btn-primary btn-lg" [routerLink]="[nextStep()]">Next</a>
   </div>
 </div>
-{{_companyInfoForm.value | json}}
-{{_companyInfoForm.status | json}}
-
