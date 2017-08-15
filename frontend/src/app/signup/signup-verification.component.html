@@ -1,15 +1,22 @@
-<h3 class="pdb_20">We need to do your ICCRC number or 변호사번호 check</h3>
+<h3 class="pdb_20">We need to do your ICCRC Membership <!--ID or law society Membership ID -->check</h3>
 <p class="pdb_30">
-  Only licenced immigration consultants can be use the Toy System. You’ll need to provide your ICCRC number or 변호사번호 before you get a head start by doing it now.
+  Only licenced immigration consultants can be use the Toy System. You’ll need to provide your ICCRC Membership ID Number <!--or Law Society Membership ID Number -->before you get a head start by doing it now.
   <a href="#">Learn more</a>
 </p>
-<div class="verifying-name">Your Name : <span>Sunmi Park</span></div>
-<label for="inputIccrc" class="sr-only">ICCRC Number</label>
-<input type="email" id="inputIccrc" class="form-control input-lg" placeholder="ICCRC Number" required="">
-<p class="pdb_10 text-center">or</p>
-<label for="input " class="sr-only">변호사번호</label>
-<input type="email" id="input " class="form-control input-lg" placeholder="변호사번호" required="">
-<div class="text-center signup-btn">
-  <button type="button" class="btn btn-default btn-lg" (click)="goPreviousPage()">Back</button>
-  <button type="button" class="btn btn-primary btn-lg" (click)="goNextPage()">Submit</button>
+<div [formGroup]="_regiNoForm">
+  <div class="verifying-name">Your Name : <span>Sunmi Park</span></div>
+  <div [ngClass]="{ 'has-error': checkHasError(_iccrcNo)}">
+    <label for="inputIccrc" class="sr-only">ICCRC Membership ID</label>
+    <input type="email" id="inputIccrc" class="form-control input-lg" (ngModel)="_consultantObj.memberId" placeholder="ICCRC ID(e.g. R123456)" formControlName="iccrcNo" (focus)="_iccrcNo.markAsUntouched()" autofocus>
+    <div class="notice" *ngIf="checkEmptyValue(_iccrcNo)">Enter your ICCRC ID No.</div>
+    <div class="notice" *ngIf="_iccrcNo.getError('pattern')">ICCRC Memgership ID format should be <i>R123456</i></div>
+  </div>
+  <!--<p class="pdb_10 text-center">or</p>-->
+  <!--<label for="input " class="sr-only">Law Society Membership ID</label>-->
+  <!--<input type="email" id="input " class="form-control input-lg" placeholder="Law Society ID">-->
+  <div class="text-center signup-btn">
+    <a class="btn btn-default btn-lg" [routerLink]="[previousStep()]">Back</a>
+    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_regiNoForm.valid}"  [routerLink]="[nextStep()]">Submit</a>
+  </div>
 </div>
+{{_consultantObj | json}}
