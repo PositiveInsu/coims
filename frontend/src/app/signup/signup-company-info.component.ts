@@ -1,4 +1,4 @@
-import {Component}              from "@angular/core";
+import {Component, OnInit}              from "@angular/core";
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import {SignupService}                       from "../_service/signup.service";
 import {CountryService, Country, Province}   from "../_service/country.service";
@@ -16,7 +16,7 @@ import {Router} from "@angular/router";
   templateUrl: './signup-company-info.component.html',
   styleUrls: ['./signup-company-info.component.css']
 })
-export class SignupCompanyInfoComponent{
+export class SignupCompanyInfoComponent implements OnInit{
   private _consultantObj: Consultant;
 
   private _companyObj: Company = new Company;
@@ -38,25 +38,31 @@ export class SignupCompanyInfoComponent{
   constructor( private signupService: SignupService,
                private countryService: CountryService,
                private fb:FormBuilder,
-               private router: Router){
+               private router: Router
+  ){}
 
+  ngOnInit(): void {
     this._countries = this.countryService.countries;
     this._provinces = this.countryService.provinces;
-    this.initProgressBar();
+
     this.checkConsultantObj();
+    this.initProgressBar();
     this.initConsultantObj();
     this.initForm();
+  }
+
+  private checkConsultantObj(){
+    if( this.signupService.isNullConsultantObj()){
+      this.signupService.moveToStep( this.router, 1);
+    }
   }
 
   private initProgressBar(){
     this.signupService.progressBarObj.currentStep = 2;
   }
 
-  private checkConsultantObj(){
-  }
-
   private initConsultantObj() {
-    this._consultantObj = this.signupService.consultantObj;
+    this._consultantObj = this.signupService.newConsultantObj;
     this._companyObj = this._consultantObj.company;
   }
 

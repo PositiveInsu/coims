@@ -1,13 +1,13 @@
-<h3 class="pdb_20">We need to do your ICCRC Membership <!--ID or law society Membership ID -->check</h3>
-<p class="pdb_30">
-  Only licenced immigration consultants can be use the Toy System. You’ll need to provide your ICCRC Membership ID Number <!--or Law Society Membership ID Number -->before you get a head start by doing it now.
-  <a href="#">Learn more</a>
-</p>
 <div [formGroup]="_regiNoForm">
+  <h3 class="pdb_20">We need to do your ICCRC Membership <!--ID or law society Membership ID -->check</h3>
+  <p class="pdb_30">
+    Only licenced immigration consultants can be use the Toy System. You’ll need to provide your ICCRC Membership ID Number <!--or Law Society Membership ID Number -->before you get a head start by doing it now.
+    <a href="#">Learn more</a>
+  </p>
   <div class="verifying-name">Your Name : <span>Sunmi Park</span></div>
   <div [ngClass]="{ 'has-error': checkHasError(_iccrcNo)}">
     <label for="inputIccrc" class="sr-only">ICCRC Membership ID</label>
-    <input type="email" id="inputIccrc" class="form-control input-lg" [(ngModel)]="_consultantObj.memberId" placeholder="ICCRC ID(e.g. R123456)" formControlName="iccrcNo" (focus)="_iccrcNo.markAsUntouched()" autofocus>
+    <input type="email" id="inputIccrc" class="form-control input-lg" formControlName="iccrcNo" [(ngModel)]="_consultantObj.memberId" placeholder="ICCRC ID(e.g. R123456)" (focus)="_iccrcNo.markAsUntouched()" autofocus>
     <div class="notice" *ngIf="checkEmptyValue(_iccrcNo)">Enter your ICCRC ID No.</div>
     <div class="notice" *ngIf="_iccrcNo.getError('pattern')">ICCRC Memgership ID format should be <i>R123456</i></div>
   </div>
@@ -19,4 +19,4 @@
     <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_regiNoForm.valid}"  (click)="signupService.nextStep( router)">Submit</a>
   </div>
 </div>
-{{_consultantObj | json}}
+

@@ -54,9 +54,7 @@ export class SignupService{
   }
 
   public goLoginPage( router: Router){
-    if( this.isNullConsultantObj){
-      this.deleteConsultantObj();
-    }
+    this.deleteConsultantObj();
     router.navigate([ this._loginPageUrl]);
   }
 
@@ -66,5 +64,9 @@ export class SignupService{
 
   public nextStep( router: Router){
     router.navigate([ this._signupStepUrl + (this._progressBarObj.currentStep + 1)]);
+  }
+
+  public moveToStep( router: Router, stepNumber: number){
+    router.navigate([ this._signupStepUrl + stepNumber]);
   }
 }
