@@ -62,7 +62,7 @@ export class SignupCompanyInfoComponent implements OnInit{
   }
 
   private initConsultantObj() {
-    this._consultantObj = this.signupService.newConsultantObj;
+    this._consultantObj = this.signupService.consultantObj;
     this._companyObj = this._consultantObj.company;
   }
 
