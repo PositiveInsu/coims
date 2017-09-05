@@ -24,16 +24,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         logger.info( "Security Config Class");
 
         http
+            .csrf()
+                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+                .and()
             .authorizeRequests()
                 .antMatchers("/", "/*.js", "/*.map", "/assets/**").permitAll()
+                .antMatchers("/p-api").permitAll()
                 .anyRequest().denyAll()
                 .and()
             .formLogin()
                 .loginPage("/");
 
 
-//                .csrf()
-//                    .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+
 //                    .and()
 //                .httpBasic()
 //                    .and()

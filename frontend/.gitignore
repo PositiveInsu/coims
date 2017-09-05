@@ -4,6 +4,7 @@
 /dist
 /tmp
 /out-tsc
+/src/main/webapp/*.*
 
 # dependencies
 /node_modules
@@ -13,8 +14,10 @@
 .project
 .classpath
 .c9/
+
 *.launch
 .settings/
+
 *.sublime-workspace
 
 # IDE - VSCode

@@ -8,6 +8,7 @@ import {SignupService}    from "../_service/signup.service";
 import {Consultant} from "../_model/consultant";
 import {FormGroup, FormBuilder, FormControl, Validators} from "@angular/forms";
 import {SignupValidator} from "../_validator/signup.validator";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'coims-signup-verification',
@@ -17,12 +18,10 @@ export class SignupVerificationComponent implements OnInit{
   private _consultantObj: Consultant;
   private _regiNoForm: FormGroup;
   private _iccrcNo: FormControl;
-  // private _lawyerNo: FormControl;
 
-  constructor( private signupService: SignupService,
-               private fb:FormBuilder,
-               private router: Router
-  ){}
+  constructor( private _signupService: SignupService,
+               private _fb: FormBuilder,
+               private _router: Router){}
 
   ngOnInit(): void {
     this.checkConsultantObj();
@@ -32,30 +31,28 @@ export class SignupVerificationComponent implements OnInit{
   }
 
   private checkConsultantObj(){
-    if( this.signupService.isNullConsultantObj()){
-      this.signupService.moveToStep( this.router, 1);
+    if( this._signupService.isNullConsultantObj()){
+      this._signupService.moveToStep( this._router, 1);
     }
   }
 
   private initProgressBar() {
-    this.signupService.progressBarObj.currentStep = 3;
+    this._signupService.progressBarObj.currentStep = 3;
   }
 
   private initConsultantObj() {
-    if( this.signupService.isNullConsultantObj()){
-      this._consultantObj = this.signupService.newConsultantObj;
+    if( this._signupService.isNullConsultantObj()){
+      this._consultantObj = this._signupService.newConsultantObj;
     }else{
-      this._consultantObj = this.signupService.consultantObj;
+      this._consultantObj = this._signupService.consultantObj;
     }
   }
 
   private initForm() {
     this._iccrcNo = new FormControl( '', Validators.compose([ Validators.required, Validators.pattern( SignupValidator.iccrcNoRegExp)]));
-    // this._lawyerNo = new FormControl( '');
 
-    this._regiNoForm = this.fb.group({
+    this._regiNoForm = this._fb.group({
       iccrcNo : this._iccrcNo,
-      // lawyerNo : this._lawyerNo
     });
   }
 
@@ -65,5 +62,9 @@ export class SignupVerificationComponent implements OnInit{
 
   private checkEmptyValue( formControlObj:FormControl): boolean{
     return formControlObj.touched && formControlObj.getError('required');
+  }
+
+  private submitConsultantObj(){
+    this._signupService.submitConsultantObj();
   }
 }

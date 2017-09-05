@@ -6,6 +6,7 @@ import {SignupProgressBar}  from "../_model/signup-progressbar";
 import {Consultant}         from "../_model/consultant";
 import {Company}            from "../_model/company";
 import {Router}             from "@angular/router";
+import {Http, Headers}      from "@angular/http";
 
 @Injectable()
 export class SignupService{
@@ -14,8 +15,17 @@ export class SignupService{
   private _consultantObj:Consultant;
   private _signupStepUrl:string = '/signup/step';
   private _loginPageUrl:string = '/login';
+  private _submitUrl:string = '/p-api';
 
-  constructor(){}
+  constructor( private _http: Http){}
+
+  public submitConsultantObj(){
+    const headers:Headers = new Headers({ "Content-Type" : "application/json"});
+
+    this._http.put( this._submitUrl, JSON.stringify( this._consultantObj), {headers: headers})
+      .map( (res) => console.log(res))
+      .subscribe( ()=>{}, error => console.log(error));
+  }
 
   get progressBarObj():SignupProgressBar{
     if( !this._progressBarObj){

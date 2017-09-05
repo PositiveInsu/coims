@@ -12,7 +12,7 @@
     <div class="notice" *ngIf="_iccrcNo.getError('pattern')">ICCRC Memgership ID format should be <i>R123456</i></div>
   </div>
   <div class="text-center signup-btn">
-    <a class="btn btn-default btn-lg" (click)="signupService.previousStep( router)">Back</a>
-    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_regiNoForm.valid}"  (click)="signupService.nextStep( router)">Submit</a>
+    <a class="btn btn-default btn-lg" (click)="signupService.previousStep( _router)">Back</a>
+    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_regiNoForm.valid}"  (click)="submitConsultantObj()">Submit</a>
   </div>
 </div>

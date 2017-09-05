@@ -25,26 +25,10 @@ repositories {
     jcenter()
 }
 
-idea {
-	module {
-		inheritOutputDirs = false
-		outputDir = file("$buildDir/classes/main")
-	}
-}
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-tomcat')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-task bowerInstaller(type:Exec) {
-    commandLine "echo", '$PATH'
-	commandLine 'bower-installer'
-}
-
-task greet(type:Exec) {
-    commandLine 'gradle -q printProperties'
 }
