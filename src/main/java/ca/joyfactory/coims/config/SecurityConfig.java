@@ -1,4 +1,4 @@
-package ca.joyfactory.config;
+package ca.joyfactory.coims.config;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

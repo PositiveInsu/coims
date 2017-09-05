@@ -1,4 +1,4 @@
-package ca.joyfactory.controller;
+package ca.joyfactory.coims.controller;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.core.util.StatusPrinter;

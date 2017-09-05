@@ -1,4 +1,4 @@
-package ca.joyfactory.util;
+package ca.joyfactory.coims.util;
 
 import org.springframework.stereotype.Component;
 
