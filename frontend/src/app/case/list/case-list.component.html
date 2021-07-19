@@ -1,0 +1,89 @@
+<div class="filtering">
+  <div class="search-case" [formGroup]="_searchCase">
+    <label for="SearchType" class="sr-only">Search Types</label>
+    <select class="form-control" id="SearchType" formControlName="searchCondition">
+      <option value="fName">First Name</option>
+      <option value="caseNo">Case No</option>
+      <option value="fileNo">File No</option>
+      <option value="uciNo">Uci No</option>
+    </select>
+    <span [ngClass]="{ 'has-error': checkHasError( _searchText)}">
+      <label for="SearchText" class="sr-only">Search Text</label>
+      <input type="text" class="form-control" id="SearchText" formControlName="searchText" (blur)="changeCaseNo()">
+    </span>
+    <button type="button" class="btn btn-primary" (click)="searchCase()" [ngClass]="{ 'disabled': !isPossibleSearch()}">Search</button>
+    <button type="button" class="btn btn-primary" (click)="searchAllCase()" [ngClass]="{ 'disabled': _ingSearchProcess}">All Case</button>
+    <span>Total Case: {{_pageInfo.getTotalElement()}}</span>
+  </div>
+  <div class="filter-case" [formGroup]="_filter">
+    <label for="caseType" class="sr-only">Case Type</label>
+    <button type="button" data-toggle="modal" data-target="#case-list-case-type-modal" class="btn btn-primary">Select CaseType</button>
+    <coims-case-list-case-type-modal (selectedCaseType)="setCaseTypeFilterData( $event)"></coims-case-list-case-type-modal>
+    <input type="text" class="form-control" id="caseType" formControlName="caseTypeCode" style="display:inline-block;width:120px;">
+    <label for="caseStatus" class="sr-only">Status</label>
+    <button type="button" data-toggle="modal" data-target="#case-list-case-status-modal" class="btn btn-primary">Select CaseStatus</button>
+    <coims-case-list-case-status-modal (selectedCaseStatus)="setCaseStatusFilterData( $event)"></coims-case-list-case-status-modal>
+    <input type="text" class="form-control" id="caseStatus" formControlName="caseStatusName" style="display:inline-block;width:120px;">
+    <label for="caseYears" class="sr-only">Years</label>
+    <select class="form-control years" id="caseYears" formControlName="caseYear" (change)="setCaseYearFilterData( $event.target.value)">
+      <option value="">All Years</option>
+      <option *ngFor="let year of _caseYearList; let i = index" [value]="year">{{year}}</option>
+    </select>
+    <button type="button" class="btn btn-primary" (click)="filteringCase()">Filter</button>
+  </div>
+</div>
+<div class="case-list">
+  <table class="table table-bordered">
+    <caption>Case List</caption>
+    <colgroup>
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+      <col width="10%">
+    </colgroup>
+    <thead>
+    <tr>
+      <th>Type</th>
+      <th>Case No.</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th class="cell-none">Date of Birth</th>
+      <th class="cell-none">UCI No.</th>
+      <th>File No.</th>
+      <th class="cell-none">Status</th>
+      <th class="cell-none sortable">Applied Date</th>
+      <th class="cell-none sortable">
+        <a href="#">
+          <span>Created Date</span>
+          <!--<span class="sorting-indicator top"></span>-->
+          <!-- <span class="sorting-indicator bottom"></span> -->
+        </a>
+      </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td colspan="10" *ngIf="_caseList.length == 0" style="text-align: center"> N/A </td>
+    </tr>
+    <tr *ngFor="let clientCase of _caseList" (click)="moveToDetailPage( clientCase.getCaseNo())">
+      <td>{{clientCase.getCaseTypeCode()}}</td>
+      <td>{{clientCase.getCaseNo()}}</td>
+      <td>{{clientCase.getClientFName()}}</td>
+      <td>{{clientCase.getClientLName()}}</td>
+      <td class="cell-none">{{getStringDate( clientCase.getClientBirthDate())}}</td>
+      <td class="cell-none">{{validateData( clientCase.getUciNo())}}</td>
+      <td>{{validateData( clientCase.getFileNo())}}</td>
+      <td class="cell-none">{{clientCase.getCaseStatus()}}</td>
+      <td class="cell-none">{{getStringDate( clientCase.getAppliedDate())}}</td>
+      <td class="cell-none">{{getStringDate( clientCase.getCreatedDate())}}</td>
+    </tr>
+    </tbody>
+  </table>
+  <coims-page-navigation [pageInfo]="_pageInfo" (moveToPage)="moveToPage($event)"></coims-page-navigation>
+</div>

@@ -1,0 +1,96 @@
+<div [formGroup]="_feeDependentInfo">
+  <div class="newmember">
+    <div class="webname">
+      <p class="nametype"><i class="fa fa-user-circle" aria-hidden="true"></i> {{existedCaseDto.getUser().getFName()}} {{existedCaseDto.getUser().getLName()}} ({{existedCaseDto.getCaseType().getCode()}})</p>
+    </div>
+    <div class="pricing-box form-group-sm">
+      <div class="type-pricing">
+        <h4>Consultant Fee</h4>
+        <div class="cont">
+          <table class="table-pricing">
+            <caption>Consultant Fee</caption>
+            <colgroup>
+              <col width="">
+              <col width="">
+            </colgroup>
+            <tr>
+              <th><label for="basic-fee">Professional Fee</label></th>
+              <td>
+                <span class="val" id="basic-fee">${{_caseFee.getBasic()}}</span>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="changes">Changes</label></th>
+              <td>
+                <div class="changes-box">
+                  <select class="form-control change-opt" id="changes" formControlName="changeType" (change)="changeConsultantFee()">
+                    <option value="{{DISCOUNT}}">Discount</option>
+                    <option value="{{EXTRA_CHARGE}}">Extra Charge</option>
+                  </select>
+                  <span class="val">$</span>
+                  <span [ngClass]="{ 'has-error': checkHasError( _changeD)}">
+                    <label for="changes-dollars" class="sr-only">Dollars</label>
+                    <input type="text" id="changes-dollars" class="form-control small2" placeholder="00" formControlName="changeD" (blur)="changeConsultantFee()">
+                  </span>
+                  <span>.</span>
+                  <span [ngClass]="{ 'has-error': checkHasError( _changeC)}">
+                    <label for="changes-cents" class="sr-only">Cents</label>
+                    <input type="text" id="changes-cents" class="form-control small" placeholder="00" formControlName="changeC" (blur)="changeConsultantFee()">
+                  </span>
+                  <div class="changes-note">
+                    <label for="changes-note" class="sr-only">Note</label>
+                    <input type="text" id="changes-note" class="form-control" placeholder="Note" formControlName="changeNote">
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="sub-total">Subtotal</label></th>
+              <td>
+                <span class="val" id="sub-total">${{_caseFee.getSubTotal()}}</span>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="tax">Tax</label></th>
+              <td>
+                <span [ngClass]="{ 'has-error': checkHasError( _taxPercentage)}">
+                  <label for="tax-percentage" class="sr-only">%</label>
+                  <input type="text" id="tax-percentage" class="form-control small2" placeholder="00" formControlName="taxPercentage" (blur)="changeConsultantFee()">
+                </span>
+                <span class="val">%</span>
+                <span class="val" id="tax"> ${{_caseFee.getTax()}}</span>
+              </td>
+            </tr>
+            <tr>
+              <th class="total"><label for="total"><strong>Total</strong></label></th>
+              <td>
+                <span class="val" id="total"><b style="color: #D9534F">${{_total}}</b></span>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="type-pricing govern">
+        <h4>Government Fee</h4>
+        <div class="cont">
+          <span><b style="color: #D9534F">${{_caseFee.getGovernment()}}</b></span>
+        </div>
+      </div>
+      <div class="type-pricing others">
+        <div class="add-payment" (click)="otherFeeToggle( !_isNeedOtherFee)">
+          <label>
+            <i class="fa fa-plus" aria-hidden="true"></i> <span *ngIf="!_isNeedOtherFee">Add Other Payment</span><span *ngIf="_isNeedOtherFee">Remove Other Payment</span>
+          </label>
+        </div>
+        <div *ngIf="_isNeedOtherFee">
+          <h4>Others</h4>
+          <div class="cont">
+            <coims-case-new-fee-other [otherFeeNumber]="0" [otherFeeList]="_caseFee.otherFeeList" (setOtherFee)="setOtherFee($event)"></coims-case-new-fee-other>
+            <coims-case-new-fee-other [otherFeeNumber]="1" [otherFeeList]="_caseFee.otherFeeList" (setOtherFee)="setOtherFee($event)"></coims-case-new-fee-other>
+            <coims-case-new-fee-other [otherFeeNumber]="2" [otherFeeList]="_caseFee.otherFeeList" (setOtherFee)="setOtherFee($event)"></coims-case-new-fee-other>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

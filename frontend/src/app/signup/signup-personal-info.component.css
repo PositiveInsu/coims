@@ -1,2 +1,5 @@
 .form-group { margin-bottom: 8px;}
 .has-error .form-control { border-left-width:5px;}
+@media (min-width:992px){
+  .form-tooltip .tip-box.test-top {top: -44px;}
+}

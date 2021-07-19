@@ -1,0 +1,16 @@
+<div class="individual">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="webname margin">
+        <p class="nametype" [ngClass]="{ 'main': isMainApplicant()}"><i class="fa fa-user-circle" aria-hidden="true"></i>
+          {{getApplicantHeader()}}</p>
+      </div>
+      <coims-case-new-review-personal [caseDto]="applicantCaseDto"></coims-case-new-review-personal>
+    </div>
+    <div class="col-md-6">
+      <coims-case-new-review-qnd [caseDto]="applicantCaseDto"></coims-case-new-review-qnd>
+    </div>
+  </div>
+</div>
+
+

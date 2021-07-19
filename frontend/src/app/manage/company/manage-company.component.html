@@ -1,0 +1,133 @@
+<div class="container-fluid" [formGroup]="_companyInfoForm">
+  <div class="cont-section">
+    <div class="management">
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="ICCRC">ICCRC No.</label>
+        </div>
+        <div class="col-md-9">
+          <input type="text" id="ICCRC" class="form-control" value="{{_user.getMemberId()}}" *ngIf="!_mode" disabled>
+          <label *ngIf="_mode">{{_user.getMemberId()}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="companyName">Company Name</label>
+        </div>
+        <div class="col-md-9" [ngClass]="{ 'has-error': checkHasError(_cName)}">
+          <input type="text" id="companyName" class="form-control" placeholder="Company Name" formControlName="cName" (focus)="_cName.markAsUntouched()" *ngIf="!_mode">
+          <div class="notice"  *ngIf="checkEmptyValue(_cName)">Enter your Company Name</div>
+          <label *ngIf="_mode">{{_companyObj.getName()}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="_mode">
+        <div class="col-md-3">
+          <label>Company Address</label>
+        </div>
+        <div class="col-md-9">
+          <label>{{_companyObj.fullAddress}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="!_mode">
+        <div class="col-md-3">
+          <label for="inputCountry">Country</label>
+        </div>
+        <div class="col-md-9">
+          <select class="form-control" id="inputCountry" formControlName="country">
+            <option *ngFor="let country of _countries" [value]="country.code">{{country.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="!_mode">
+        <div class="col-md-3">
+          <label for="inputStreet">Street</label>
+        </div>
+        <div class="col-md-9"[ngClass]="{ 'has-error': checkHasError(_street)}">
+          <input type="text" id="inputStreet" class="form-control" placeholder="Street Address (e.g. 108 Avenue)" formControlName="street" (focus)="_street.markAsUntouched()">
+          <div class="notice" *ngIf="checkEmptyValue(_street)">Enter your street address.</div>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="!_mode">
+        <div class="col-md-3">
+          <label for="inputCity">City</label>
+        </div>
+        <div class="col-md-9" [ngClass]="{ 'has-error': checkHasError(_city)}">
+          <input type="text" id="inputCity" class="form-control" placeholder="Town/City" formControlName="city" (focus)="_city.markAsUntouched()">
+          <div class="notice" *ngIf="checkEmptyValue(_city)">Enter your city.</div>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="!_mode">
+        <div class="col-md-3">
+          <label for="inputProvince">Province</label>
+        </div>
+        <div class="col-md-9">
+          <select class="form-control" id="inputProvince" formControlName="province">
+            <option *ngFor="let province of _provinces" [value]="province.code">{{province.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="row pdb_10" *ngIf="!_mode">
+        <div class="col-md-3">
+          <label for="inputPostal">Postal Code</label>
+        </div>
+        <div class="col-md-9" [ngClass]="{ 'has-error': checkHasError( _postal)}">
+          <input type="text" id="inputPostal" class="form-control" placeholder="Postal Code" formControlName="postal" (focus)="_postal.markAsUntouched()">
+          <div class="notice" style="font-size: 16px" *ngIf="checkEmptyValue(_postal)">Enter your postal code.</div>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="companyPhone">Phone</label>
+        </div>
+        <div class="col-md-9" [ngClass]="{ 'has-error': checkHasError(_cPhone)}">
+          <input type="text" id="companyPhone" class="form-control" placeholder="Phone" formControlName="cPhone" (focus)="_cPhone.markAsUntouched()" *ngIf="!_mode">
+          <div class="notice" *ngIf="checkEmptyValue(_cPhone)">Enter your Phone number</div>
+          <label *ngIf="_mode">{{ displayValue(_companyObj.getPhone())}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="companyEmail">Company Email</label>
+        </div>
+        <div class="col-md-9" [ngClass]="{ 'has-error': checkHasError(_cEmail)}">
+          <input type="text" id="companyEmail" class="form-control" placeholder="Email" formControlName="cEmail" (focus)="_cEmail.markAsUntouched()" *ngIf="!_mode">
+          <div class="notice" *ngIf="checkEmptyValue(_cEmail)">Enter your Email</div>
+          <div class="notice" *ngIf="_cEmail.getError('pattern')">Email format should be <i>jade@abc.com</i>.</div>
+          <label *ngIf="_mode">{{_companyObj.getEmail()}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="companyFax">Fax</label>
+        </div>
+        <div class="col-md-9">
+          <input type="text" id="companyFax" class="form-control" placeholder="Fax"formControlName="fax" *ngIf="!_mode">
+          <label *ngIf="_mode">{{ displayValue(_companyObj.getFax())}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="companyHomepage">Homepage</label>
+        </div>
+        <div class="col-md-9">
+          <input type="text" id="companyHomepage" class="form-control" placeholder="Homepage" formControlName="website" *ngIf="!_mode">
+          <label *ngIf="_mode">{{ displayValue(_companyObj.getWebsite())}}</label>
+        </div>
+      </div>
+      <div class="row pdb_10">
+        <div class="col-md-3">
+          <label for="gst-no">GST No.</label>
+        </div>
+        <div class="col-md-9">
+          <input type="text" id="gst-no" class="form-control" placeholder="GST No." formControlName="gstNo" *ngIf="!_mode">
+          <label *ngIf="_mode">{{ displayValue(_companyObj.getGstNo())}}</label>
+        </div>
+      </div>
+      <div class="setting-btn">
+        <button type="button" class="btn btn-primary" [ngClass]="{ 'disabled': _isSubmitting}" *ngIf="!_mode" (click)="cancel()">Cancel</button>
+        <button type="button" class="btn btn-primary" [ngClass]="{ 'disabled': checkAllConditionPassed()}" *ngIf="!_mode" (click)="saveCompanyInfo()">Save</button>
+        <button type="button" class="btn btn-primary" *ngIf="_mode" (click)="modifyCompanyInfo()">Modify</button>
+      </div>
+    </div>
+  </div>
+</div>

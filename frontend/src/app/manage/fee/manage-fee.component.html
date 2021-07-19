@@ -1,0 +1,70 @@
+<div class="management middle">
+  <div class="tab-pricing">
+    <ul class="row">
+      <li class="col-sm-3 col-xs-6" *ngFor="let key of _categoryKeyList" [ngClass]="key.toLowerCase()">
+        <a href="javascript:void(0)" (click)="scrollTo( key)">
+          <span class="top">{{key}}</span>
+          <ul class="details">
+            <li *ngFor="let caseType of _caseTypeCategory[key]">{{caseType.name}}</li>
+          </ul>
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="heading-btn" style="text-align: right;">
+    <a href="javascript:void(0)" (click)="downloadFeeList()"><i class="fa fa-download" aria-hidden="true"></i>Fee List</a>
+  </div>
+  <div class="pricing-field" id="{{key}}" *ngFor="let key of _categoryKeyList" [ngClass]="key.toLowerCase()"  [formGroup]="_formGroupObj[ key]">
+    <h3>{{key}}</h3>
+    <button type="button" class="btn btn-primary btn-sm" *ngIf="!isModifyMode( key)" (click)="changeMode( key)">Modify</button>
+    <button type="button" class="btn btn-primary btn-sm" *ngIf="isModifyMode( key)" (click)="submit( key)">Save</button>
+    <button type="button" class="btn btn-primary btn-sm" *ngIf="isModifyMode( key)" (click)="changeMode( key)">Cancel</button>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let caseType of _caseTypeCategory[key]">
+        <div class="sect-pricing">
+          <table class="table">
+            <caption></caption>
+            <thead>
+            <tr>
+              <th colspan="2">{{caseType.name}}</th>
+            </tr>
+            </thead>
+            <tbody *ngIf="caseType.hasChild">
+              <tr *ngFor="let childCaseType of caseType.chlidCaseTypeList">
+                <td style="padding-left: 30px; color: gray;">{{childCaseType.name}}</td>
+                <td class="text-right">
+                  <span>$</span>
+                  <span *ngIf="!isModifyMode( key)">{{getDollar( childCaseType.fee)}}</span>
+                  <label *ngIf="isModifyMode( key)" for="{{childCaseType.name}}-dollars" class="sr-only">Dollars</label>
+                  <input *ngIf="isModifyMode( key)" type="text" id="{{childCaseType.name}}-dollars" class="form-control small2" formControlName="{{ getDollarControlName( childCaseType.getCode())}}" (blur)="deleteFrontZero( key, getDollarControlName( childCaseType.getCode()))" maxlength="5">
+                  <span>.</span>
+                  <span *ngIf="!isModifyMode( key)">{{getCent( childCaseType.fee)}}</span>
+                  <label *ngIf="isModifyMode( key)" for="{{childCaseType.name}}-cents" class="sr-only">Cents</label>
+                  <input *ngIf="isModifyMode( key)" type="text" id="{{childCaseType.name}}-cents" class="form-control small" formControlName="{{ getCentControlName( childCaseType.getCode())}}" (blur)="addEndZero( key, getCentControlName( childCaseType.getCode()))" maxlength="2">
+                </td>
+              </tr>
+            </tbody>
+            <tbody *ngIf="!caseType.hasChild">
+            <tr>
+              <td colspan="2" class="text-right">
+                <span>$</span>
+                <span *ngIf="!isModifyMode( key)">{{getDollar(caseType.fee)}}</span>
+                <label *ngIf="isModifyMode( key)" for="{{caseType.name}}-dollars" class="sr-only">Dollars</label>
+                <input *ngIf="isModifyMode( key)" type="text" id="{{caseType.name}}-dollars" class="form-control small2" formControlName="{{ getDollarControlName( caseType.getCode())}}" (blur)="deleteFrontZero( key, getDollarControlName( caseType.getCode()))" maxlength="5">
+                <span>.</span>
+                <span *ngIf="!isModifyMode( key)">{{getCent(caseType.fee)}}</span>
+                <label *ngIf="isModifyMode( key)" for="{{caseType.name}}-cents" class="sr-only">Cents</label>
+                <input *ngIf="isModifyMode( key)" type="text" id="{{caseType.name}}-cents" class="form-control small" formControlName="{{ getCentControlName( caseType.getCode())}}" (blur)="addEndZero( key, getCentControlName( caseType.getCode()))" maxlength="2">
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="javascript:void(0);" (click)="scrollToTop()" class="top-btn" id="topBtn">
+  <span class="icon"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+  <span>Top</span>
+</a>

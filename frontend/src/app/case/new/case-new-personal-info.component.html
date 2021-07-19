@@ -1,0 +1,70 @@
+<div [formGroup]="_mainApplicant">
+  <div class="newmember">
+    <div class="webname">
+      <div class="nametype main">
+        <div class="name"><i class="fa fa-user-circle" aria-hidden="true"></i> {{_fName.value}} {{_lName.value}}  <span *ngIf="_caseDto.getCaseType()"> ({{_caseDto.getCaseType().getCode()}})</span></div>
+        <div class="type-label">
+        </div>
+      </div>
+    </div>
+    <dl>
+      <dt>
+        <label for="inputEmail">E-mail <span class="color-danger">*</span></label>
+      </dt>
+      <dd [ngClass]="{ 'has-error': checkHasError( _email)}">
+        <input type="email" id="inputEmail" class="form-control w100" placeholder="Email address" formControlName="email" (focus)="_email.markAsUntouched()" autofocus>
+        <button type="button" data-toggle="modal" class="btn btn-primary" [ngClass]="{ 'disabled': !_email.valid}" (click)="checkClientEmail()">Search</button>
+        <coims-case-new-client-check-modal (completedClientCheck)="setClient($event)" [clientEmail]="_email.value" [hasError]="checkHasError( _email)" [modal_no]="this._caseNewService.MAIN_CASE_NUMBER"></coims-case-new-client-check-modal>
+      </dd>
+      <div *ngIf="_isCheckedClient">
+        <coims-case-new-case-type (selectedCaseType)="setCaseType($event)" [caseType]="_caseDto.getCaseType()"></coims-case-new-case-type>
+        <dt>
+          <label for="first_name">First Name <span class="color-danger">*</span></label>
+        </dt>
+        <dd>
+          <input type="text" id="first_name" class="form-control w100" placeholder="First name" formControlName="fName" (focus)="_fName.markAsUntouched()" (blur)="changeValueToUpperCase( _fName)">
+        </dd>
+        <dt>
+          <label for="last_name">Last Name <span class="color-danger">*</span></label>
+        </dt>
+        <dd>
+          <input type="text" id="last_name" class="form-control w100" placeholder="Last name" formControlName="lName" (focus)="_lName.markAsUntouched()" (blur)="changeValueToUpperCase( _lName)">
+        </dd>
+        <dt>
+          <label for="inputPhoneNo">Phone <span class="color-danger">*</span></label>
+        </dt>
+        <dd>
+          <input type="text" id="inputPhoneNo" class="form-control w100" placeholder="Phone Number" formControlName="phoneNo">
+        </dd>
+        <dt>
+          <label for="birth_date">Date of Birth</label>
+        </dt>
+        <dd id="birth_date">
+          <select class="form-control small-select" formControlName="bMonth">
+            <option value="">-</option>
+            <option *ngFor="let month of _monthList" [value]="month.value">{{month.monthName}}</option>
+          </select>
+          <select class="form-control small-select" formControlName="bDate">
+            <option value="">-</option>
+            <option *ngFor="let dateValue of getRange( 1, 31)" [value]="dateValue">{{dateValue}}</option>
+          </select>
+          <select class="form-control small-select" formControlName="bYear">
+            <option value="">-</option>
+            <option *ngFor="let yearValue of getRange( _thisYear, _thisYear - 70)" [value]="yearValue">{{yearValue}}</option>
+          </select>
+        </dd>
+      </div>
+    </dl>
+  </div>
+  <ng-template case-new-personal-info-dependent></ng-template>
+  <div class="addmember checkbox" (click)="addDependent()" *ngIf="_isCheckedClient">
+    <label>
+      <i class="fa fa-plus" aria-hidden="true"></i>
+      Add Dependent
+    </label>
+  </div>
+  <div class="text-center signup-btn">
+    <button type="button" class="btn btn-default" (click)="goCaseList()">List</button>
+    <button type="button" class="btn btn-primary" [ngClass]="{ 'disabled': !isPersonalInfosValid()}" (click)="nextStep()">Next</button>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="case-top-status">
+  <div class="status-top-txt">Current status : <span>{{_currentCaseStatus}}</span>
+    <a href="" data-toggle="modal" data-target="#caseStatus">View details</a>
+  </div>
+  <coims-case-detail-status-modal *ngIf="_isInitComplete" [caseStatusList]="_caseStatusList" [caseId]="_caseList[0].id" [stepNo]="_stepNo"></coims-case-detail-status-modal>
+  <ul>
+    <li [ngClass]="{ 'active': checkActive( caseStatus), 'on': checkOn( caseStatus)}" *ngFor="let caseStatus of _caseStatusList">
+      <span class="point"></span>
+      <p class="txt-status">{{caseStatus.getName()}}</p>
+    </li>
+  </ul>
+</div>
+<ng-template case-detail-content></ng-template>
+<div class="text-center signup-btn">
+  <button type="button" class="btn btn-primary" [disabled]="!_isReadyStatusChange" (click)="nextStep()">Confirm</button>
+</div>
+<a href="javascript:;" class="top-btn" id="topBtn">
+  <span class="icon"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+  <span>Top</span>
+</a>
+

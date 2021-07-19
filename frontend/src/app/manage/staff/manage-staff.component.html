@@ -1,0 +1,51 @@
+<div class="list-filter">
+  <!--<div class="search">-->
+    <!--<div class="input-group">-->
+      <!--<input type="text" class="form-control" placeholder="Search for email" #searchTarget>-->
+      <!--<span class="input-group-btn">-->
+        <!--<button class="btn btn-default" type="button" (click)="searchStaffWithEmail( searchTarget)"><i class="fa fa-search" aria-hidden="true"></i></button>-->
+      <!--</span>-->
+    <!--</div>-->
+  <!--</div>-->
+  <button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalAddstaff" (click)="openModal()">Add Staffs</button>
+  <coims-manage-staff-modal (parentRefresh)="refreshData()"></coims-manage-staff-modal>
+</div>
+<div class="staff-list">
+  <div class="staff-table row">
+    <div class="col-lg-4" *ngFor="let staff of _staffList">
+      <div class="box">
+        <div class="photo">
+          <div class="image"></div>
+        </div>
+        <div class="txt">
+          <p class="name">{{staff.lname + " " + staff.fname}}</p>
+          <p class="email">{{staff.email}}</p>
+          <p class="phone">{{getPhoneNo( staff)}}</p>
+          <p class="status"><strong>{{staff.type}}</strong> - {{staff.status}}</p>
+        </div>
+        <div class="modify">
+          <button type="button" (click)="modalOpenWithData( staff)"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="list-pagination">
+    <nav aria-label="Page navigation" *ngIf="_pageInfo.getTotalPage() > 1">
+      <ul class="pagination pagination-sm">
+        <li>
+          <a (click)="changePage( 0)" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+          </a>
+        </li>
+        <li [ngClass]="{'active': _pageInfo.getPage() === i }" *ngFor="let in of count(_pageInfo.getTotalPage()) ;let i = index">
+          <a (click)="changePage( i)">{{i + 1}}</a>
+        </li>
+        <li>
+          <a (click)="changePage( _pageInfo.getTotalPage()-1)" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

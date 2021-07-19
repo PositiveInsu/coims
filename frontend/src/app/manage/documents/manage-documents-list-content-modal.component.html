@@ -1,0 +1,87 @@
+<div class="modal fade" id="addSupport" tabindex="-1" role="dialog" aria-labelledby="addSupport">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Supporting Documents</h4>
+      </div>
+      <div class="modal-body">
+        <div class="add-support">
+          <h5>{{_caseType.getCode()}}</h5>
+          <div class="add-list">
+            <div class="row">
+              <div class="box col-md-5">
+                <ul class="sp-list" *ngFor="let key of _categoryKeyList">
+                  <li *ngIf="isNotAdditionalCategory( key)">
+                    - {{key}}
+                    <ul class="details">
+                      <li *ngFor="let caseTypeDocument of _docCategory[key]">
+                        <div class="checkbox">
+                          <label>
+                            <input type="checkbox" name="">{{caseTypeDocument.name}}
+                          </label>
+                        </div>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+              <div class="center col-md-1">
+                <div class="bt_add"><button><i class="fa fa-chevron-circle-right fa-2x" aria-hidden="true"></i></button></div>
+                <div class="bt_add"><button><i class="fa fa-chevron-circle-left fa-2x" aria-hidden="true"></i></button></div>
+              </div>
+              <div class="box col-md-6">
+                <ul class="sp-list" [formGroup]="_modifyDocumentForm">
+                  <li *ngFor="let key of _categoryKeyList">
+                    {{key}}
+                    <ul class="details" *ngIf="_defaultDocCategory[key].length > 0">
+                      <li *ngFor="let caseDocument of _defaultDocCategory[key]">
+                        <span class="checkbox">
+                          <label>
+                            <input type="checkbox" name=""><span *ngIf="!caseDocument['modify_mode']">{{caseDocument.name}}</span>
+                          </label>
+                        </span>
+                        <span  *ngIf="caseDocument['modify_mode']" [ngClass]="{ 'has-error': checkHasError( caseDocument.getId())}">
+                          <input type="text" class="form-control" formControlName="{{caseDocument.getId()}}">
+                        </span>
+                        <span>
+                          <button (click)="deleteDocument( caseDocument)" *ngIf="!caseDocument['modify_mode']">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
+                          </button>
+                          <button (click)="changeModifyMode( caseDocument)" *ngIf="!caseDocument['modify_mode']">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                          </button>
+                          <button (click)="modifyDocName( caseDocument)" *ngIf="caseDocument['modify_mode']">
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+                          </button>
+                        </span>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="box-additional" [formGroup]="_addDocumentForm">
+              <h6>Add Document</h6>
+              <select id="position" class="form-control" formControlName="category">
+                <option value="">Category</option>
+                <option (value)="key" *ngFor="let key of _categoryKeyList">{{key}}</option>
+              </select>
+              <label for="document_code" class="sr-only">Document Code</label>
+              <input id="document_code" class="form-control" placeholder="Document Code" class="form-control" formControlName="docCode" (blur)="changeValueToUpperCase( _docCode)">
+              <label for="document_name" class="sr-only">Document Name</label>
+              <input id="document_name" class="form-control" placeholder="Document Name" class="form-control" formControlName="docName">
+              <div class="text-right pdt_10">
+                <button type="button" class="btn btn-default btn-sm" [ngClass]="{ 'disabled': checkAllConditionPassed()}" (click)="addDocument()">Add</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Save</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

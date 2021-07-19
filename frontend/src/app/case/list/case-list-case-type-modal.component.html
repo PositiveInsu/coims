@@ -1,0 +1,30 @@
+<div class="modal fade" id="case-list-case-type-modal" tabindex="-1" role="dialog" aria-labelledby="addSupport" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: center">
+        <h4 class="modal-title" id="myModalLabel">Select Case Type</h4>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <div [formGroup]="_caseTypeForm">
+          <select class="form-control medium-select" (change)="selectCaseCategory( $event.target.value)" formControlName="category">
+            <option value="">-</option>
+            <option *ngFor="let category of _categoryKeyList" [value]="category">{{category}}</option>
+          </select>
+          <select class="form-control medium-select" *ngIf="_parentCaseTypeList != null" (change)="selectParentCaseType( $event.target.value)" formControlName="parentCaseType">
+            <option value="">-</option>
+            <option *ngFor="let parentCaseType of _parentCaseTypeList; let i = index" [value]="i">{{parentCaseType.name}}</option>
+          </select>
+          <select class="form-control medium-select" *ngIf="_childCaseTypeList != null" (change)="selectChildCaseType( $event.target.value)" formControlName="childCaseType">
+            <option value="">-</option>
+            <option *ngFor="let childCaseType of _childCaseTypeList; let i = index" [value]="i">{{childCaseType.name}}</option>
+          </select>
+        </div>
+        <div style="color: #a94442" *ngIf="_isOpenMessage">Please Select Case Type!</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="selectCaseType()">Select</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Not Applicable</button>
+      </div>
+    </div>
+  </div>
+</div>

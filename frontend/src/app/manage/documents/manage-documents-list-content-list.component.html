@@ -1,0 +1,35 @@
+<div class="cont">
+  <h6>Supporting Documents</h6>
+  <ul class="doc-list" *ngFor="let key of _categoryKeyList">
+    <li *ngIf="isNotEmptyAndAdditionalCategory( key)">
+      - {{key}}
+      <ul class="details">
+        <li *ngFor="let caseTypeDocument of _docCategory[key]">
+          {{caseTypeDocument.name}}
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <div class="pdb_30 text-right">
+    <button type="button" data-toggle="modal" data-target="#addSupport" class="btn btn-default btn-admin">Add Supporting Documents</button>
+  </div>
+  <coims-manage-documents-list-content-modal [caseType]="_caseType"></coims-manage-documents-list-content-modal>
+</div>
+<div class="box-additional">
+  <h6>Additional Documents</h6>
+  <div class="additional-list">
+    <ul *ngFor="let caseTypeDocument of _docCategory[ _categoryFactory.categoryTypeObj.ADDITIONAL]">
+      <li>
+        &middot; {{caseTypeDocument.name}}
+        <a href="javasctipt:void(0)" (click)="deleteDocument( caseTypeDocument.getId())" class="delete"><i class="fa fa-trash" aria-hidden="true"></i></a>
+      </li>
+    </ul>
+  </div>
+  <div class="form-group" [formGroup]="_additionalFormGroup">
+    <label for="add-doc" class="sr-only">Additional Documents</label>
+    <input id="add-doc" class="form-control" placeholder="Additional Document" formControlName="docName">
+    <div class="text-right pdt_10">
+      <button type="button" class="btn btn-default btn-sm" [ngClass]="{ 'disabled': checkAllConditionPassed()}" (click)="addDocument()">Add</button>
+    </div>
+  </div>
+</div>

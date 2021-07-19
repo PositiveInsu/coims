@@ -1,0 +1,170 @@
+<div class="main-header">
+  <a href="javascript:void(0);" class="m_main_btn">
+    <div class="hamburger"><span><p></p><p></p><p></p></span></div>
+  </a>
+  <h1 class="logo"><a (click)="selectLogo()"><img src="{{_config.coimsLogoUrl}}" alt="COIMS"></a></h1>
+  <div class="new-btn">
+    <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i>
+    <ul class="btngroup">
+      <li>
+        <a href="javascript:void(0)" (click)="moveToAddCase()">
+          Case
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          Counsel
+        </a>
+      </li>
+    </ul>
+  </div>
+  <div class="m-right-btn">
+    <div class="dropdown">
+      <a href="javascript:;" class="search" id="h_search" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+      </a>
+      <div class="search-box dropdown-menu" aria-labelledby="h_search">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Search for">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+            <i class="fa fa-search" aria-hidden="true"></i>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="dropdown">
+      <a href="javascript:;" id="h_ellipsis" class="ellipsis" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v fa-2x" aria-hidden="true"></i>
+      </a>
+      <div class="group-box dropdown-menu" aria-labelledby="h_ellipsis">
+        <ul>
+          <li>
+            <a href="#">
+              <span class="left">
+                  <i class="fa fa-calendar" aria-hidden="true"></i> <span>Schedule</span>
+              </span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="left">
+                  <i class="fa fa-bell-o" aria-hidden="true"></i> <span>Notification</span>
+              </span>
+              <span class="right on">(1)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="left">
+                  <i class="fa fa-commenting-o" aria-hidden="true"></i> <span>Messages</span>
+              </span>
+              <span class="right">(0)</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <span class="left">
+                  <i class="fa fa-user" aria-hidden="true"></i> <span>Users</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <ul class="right-btn">
+    <li>
+      <div class="dropdown">
+        <a href="javascript:;">
+          <i class="fa fa-search fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown">
+        <a href="#">
+          <i class="fa fa-calendar fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </li>
+    <li>
+      <span class="new"></span>
+      <div class="dropdown">
+        <a href="javascript:;" id="h_new" class="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-bell-o fa-2x" aria-hidden="true"></i>
+        </a>
+        <div class="notice-box dropdown-menu" aria-labelledby="h_new">
+          <div class="notice-header">
+            <h3><i class="fa fa-envelope" aria-hidden="true"></i> Messages (<span>5</span>)</h3>
+            <a href="#">View Inbox</a>
+          </div>
+          <ul>
+            <li>
+              <a href="#">
+                <div class="individual">
+                  <p class="name">[SP-01-001] Insu Jo</p>
+                  <p class="date">Dec-10-2011 00:00</p>
+                </div>
+                <div class="cont">
+                  Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div class="individual">
+                  <p class="name">[WP-01-001] Scarlet Mary Johanson</p>
+                  <p class="date">Dec-10-2011 00:00</p>
+                </div>
+                <div class="cont">
+                  Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello Hello
+                </div>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <div class="individual">
+                  <p class="name">[SP-01-001] Insu Jo</p>
+                  <p class="date">Dec-10-2011 00:00</p>
+                </div>
+                <div class="cont">
+                  Hello Hello Hell-
+                </div>
+              </a>
+            </li>
+          </ul>
+          <div class="notice-header">
+            <h3><i class="fa fa-bell" aria-hidden="true"></i> Notifications (<span>5</span>)</h3>
+            <a href="#">View Dashboard</a>
+          </div>
+          <ul class="alert-notice">
+            <li>
+              <a href="#">
+                <p><span class="icon-system">System</span> Notice About Temporary Service Suspension</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <p><span class="icon-regulation">Regulations</span> Archived - Minister Alexander highlights success of Canadian citizenship program</p>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <p><span class="icon-regulation">Regulations</span> Archived citizenship program</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown">
+        <a href="javascript:;" (click)="doLogout()">
+          <i class="fa fa-user fa-2x" aria-hidden="true"></i>
+        </a>
+      </div>
+    </li>
+  </ul>
+</div>

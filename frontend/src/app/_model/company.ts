@@ -2,99 +2,132 @@
  * Created by Joinsu on 2017-05-12.
  */
 export class Company{
-  private _name: string;
-  private _country: string;
-  private _street: string;
-  private _city: string;
-  private _province: string;
-  private _postal: string;
-  private _phone: string;
-  private _email: string;
-  private _website: string;
-  private _fax: string;
+  private id: number;
+  private name: string;
+  private country: string;
+  private street: string;
+  private city: string;
+  private province: string;
+  private postal: string;
+  private phone: string;
+  private email: string;
+  private website: string;
+  private fax: string;
+  private gstNo: string;
 
-  get name(): string {
-    return this._name;
+  getId(): number {
+    return this.id;
   }
 
-  set name(value: string) {
-    this._name = value;
+  setId( value: number) {
+    this.id = value;
   }
 
-  get country(): string {
-    return this._country;
+  getName(): string {
+    return this.name;
   }
 
-  set country(value: string) {
-    this._country = value;
+  setName(value: string) {
+    this.name = value;
   }
 
-  get street(): string {
-    return this._street;
+  getCountry(): string {
+    return this.country;
   }
 
-  set street(value: string) {
-    this._street = value;
+  setCountry(value: string) {
+    this.country = value;
   }
 
-  get city(): string {
-    return this._city;
+  getStreet(): string {
+    return this.street;
   }
 
-  set city(value: string) {
-    this._city = value;
+  setStreet(value: string) {
+    this.street = value;
   }
 
-  get province(): string {
-    return this._province;
+  getCity(): string {
+    return this.city;
   }
 
-  set province(value: string) {
-    this._province = value;
+  setCity(value: string) {
+    this.city = value;
   }
 
-  get postal(): string {
-    return this._postal;
+  getProvince(): string {
+    return this.province;
   }
 
-  set postal(value: string) {
-    this._postal = value;
+  setProvince(value: string) {
+    this.province = value;
   }
 
-  get phone(): string {
-    return this._phone;
+  getPostal(): string {
+    return this.postal;
   }
 
-  set phone(value: string) {
-    this._phone = value;
+  setPostal(value: string) {
+    this.postal = value;
   }
 
-  get email(): string {
-    return this._email;
+  getPhone(): string {
+    return this.phone;
   }
 
-  set email(value: string) {
-    this._email = value;
+  setPhone(value: string) {
+    this.phone = value;
   }
 
-  get website(): string {
-    return this._website;
+  getEmail(): string {
+    return this.email;
   }
 
-  set website(value: string) {
-    this._website = value;
+  setEmail(value: string) {
+    this.email = value;
   }
 
-  get fax(): string {
-    return this._fax;
+  getWebsite(): string {
+    return this.website;
   }
 
-  set fax(value: string) {
-    this._fax = value;
+  setWebsite(value: string) {
+    this.website = value;
+  }
+
+  getFax(): string {
+    return this.fax;
+  }
+
+  setFax(value: string) {
+    this.fax = value;
+  }
+
+  getGstNo(): string {
+    return this.gstNo;
+  }
+
+  setGstNo(value: string) {
+    this.gstNo = value;
   }
 
   get fullAddress(){
     let space:string = ', ';
-    return this._street + space + this._city + space + this._province + space + this._country + ' ' + this._postal;
+    return this.street + space + this.city + space + this.province + space + this.country + ' ' + this.postal;
+  }
+
+  setDataFromResponse(responseData: any){
+    this.setId( responseData.id);
+    this.setName( responseData.name);
+    this.setCountry( responseData.country);
+    this.setProvince( responseData.province);
+    this.setCity( responseData.city);
+    this.setStreet( responseData.street);
+    this.setPostal( responseData.postal);
+    this.setPhone( responseData.phone);
+    this.setFax( responseData.fax);
+    this.setEmail( responseData.email);
+    this.setWebsite( responseData.website);
+    this.setGstNo( responseData.gstNo);
   }
 }

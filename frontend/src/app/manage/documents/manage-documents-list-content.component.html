@@ -1,0 +1,31 @@
+<div class="setting-cont" *ngIf="_isContentOpen">
+  <h4>{{_caseType.getName()}}</h4>
+  <div class="detail-case-list" *ngIf="_caseType.getHasChild()">
+    <ul class="nav nav-tabs setting-docs">
+      <li role="presentation" *ngFor="let childCaseType of _caseType.chlidCaseTypeList; index as i" [ngClass]="{'active': isActive( childCaseType.getName(), i)}">
+        <a href="#{{childCaseType.getName()}}" (click)="selectTab( childCaseType)" [attr.aria-controls]="childCaseType.getName()" role="tab" data-toggle="tab">{{ childCaseType.getName()}}</a>
+      </li>
+    </ul>
+    <div class="tab-content tab-cont-docs">
+      <div role="tabpanel" *ngFor="let childCaseType of _caseType.chlidCaseTypeList; index as i" class="tab-pane" [ngClass]="{'active': isActive( childCaseType.getName(), i)}" id="{{ childCaseType.getName()}}">
+        <div class="heading-btn">
+          <h5>{{childCaseType.getName()}}</h5>
+          <a href="javascript:void(0)" (click)="downloadDocumentCheckList( childCaseType)"><i class="fa fa-download" aria-hidden="true"></i>Document Checklist</a>
+        </div>
+        <coims-manage-documents-list-content-list [caseType]="childCaseType"></coims-manage-documents-list-content-list>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!_caseType.getHasChild()">
+    <div class="slev-btn">
+      <a href="javascript:void(0)" (click)="downloadDocumentCheckList( _caseType)"><i class="fa fa-download" aria-hidden="true"></i>Document Checklist</a>
+    </div>
+    <div class="detail-case-list">
+      <div class="detail-case-list">
+        <div class="cont borderbox">
+          <coims-manage-documents-list-content-list [caseType]="_caseType"></coims-manage-documents-list-content-list>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="col-sm-8">
+  <div *ngIf="_isFileExist">
+    <span>
+      <a href="javascript:void(0)" (click)="downloadFile()"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> {{ _existFileName}}</a>
+    </span>
+    <span style="margin-left: 10px;">
+      <a href="javasctipt:void(0)" class="delete" (click)="deleteFile()"><i class="fa fa-trash" aria-hidden="true"></i></a>
+    </span>
+  </div>
+  <div *ngIf="_uploadTargetFile" class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped"
+         role="progressbar" attr.aria-valuenow="{{_progress.percentage}}"
+         aria-valuemin="0" aria-valuemax="100"
+         [ngStyle]="{width:_progress.percentage+'%'}">
+    </div>
+  </div>
+  <div class="form-group" [formGroup]="_fileUploadForm" *ngIf="!_isFileExist">
+    <span class="btn btn-default btn-file" style="float: left">
+      Browse..
+      <input type="file" id="exampleInputFile" (change)="selectFile($event)" formControlName="fileSelectBox">
+    </span>
+    <span style="float: left; width:30%; margin-right: 10px;">
+      <input type="text" class="form-control" formControlName="selectedFileName">
+    </span>
+    <div>
+      <p *ngIf="_maxSizeError" class="color-danger">Don't over the file size 4MB</p>
+      <button class="btn btn-primary" [disabled]="!_selectedFiles" (click)="upload()">Upload</button>
+    </div>
+  </div>
+</div>

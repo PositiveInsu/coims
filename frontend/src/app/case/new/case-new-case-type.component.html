@@ -1,0 +1,19 @@
+<div [formGroup]="_caseTypeForm">
+  <dt>
+    <label for="case_type">Case Type <span class="color-danger">*</span></label>
+  </dt>
+  <dd id="case_type">
+    <select class="form-control medium-select" (change)="selectCaseCategory( $event.target.value)" formControlName="category">
+      <option value="">-</option>
+      <option *ngFor="let category of _categoryKeyList" [value]="category">{{category}}</option>
+    </select>
+    <select class="form-control medium-select" *ngIf="_parentCaseTypeList != null" (change)="selectParentCaseType( $event.target.value)" formControlName="parentCaseType">
+      <option value="">-</option>
+      <option *ngFor="let parentCaseType of _parentCaseTypeList; let i = index" [value]="i">{{parentCaseType.name}}</option>
+    </select>
+    <select class="form-control medium-select" *ngIf="_childCaseTypeList != null" (change)="selectChildCaseType( $event.target.value)" formControlName="childCaseType">
+      <option value="">-</option>
+      <option *ngFor="let childCaseType of _childCaseTypeList; let i = index" [value]="i">{{childCaseType.name}}</option>
+    </select>
+  </dd>
+</div>

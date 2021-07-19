@@ -1,0 +1,18 @@
+<div class="container-fluid">
+  <div class="cont-section">
+    <div class="newcase">
+      <div class="newcase-top">
+        <div class="steps">
+          <ul>
+            <li *ngFor="let caseStep of _newCaseStepObj.stepObj" [ngClass]="{ 'active': caseStep.activeClass, 'on': caseStep.onClass}">
+              <span class="number">{{caseStep.step}}</span> <p>{{caseStep.stepName}}</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="steps-content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>
