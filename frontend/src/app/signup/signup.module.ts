@@ -8,7 +8,7 @@ import {SignupRoutingModule}                      from "./signup.routing.module"
 import {ProgressbarModule}                        from "ngx-bootstrap";
 
 import {SignupService}                from "../_service/signup.service";
-import {CountryService}               from "../_service/country.service";
+import {CommonDataService}               from "../_service/common-data.service";
 
 import {SignupComponent}              from "./signup.component";
 import {SignupPersonalInfoComponent}  from "./signup-personal-info.component";
@@ -34,7 +34,7 @@ import {SignupCompleteComponent}      from "./signup-complete.component";
   exports: [ SignupComponent],
   providers: [
     SignupService,
-    CountryService
+    CommonDataService
   ]
 })
 export class SignupModule{}

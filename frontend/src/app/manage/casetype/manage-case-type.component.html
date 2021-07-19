@@ -1,0 +1,12 @@
+<!--<div *ngFor="let caseType of _caseTypeList">-->
+  <!--{{caseType}}-->
+  <!--&lt;!&ndash;<div *ngFor="let childCaseType of caseType._chlidCaseTypeList" style="padding-left: 30px">&ndash;&gt;-->
+    <!--&lt;!&ndash;{{childCaseType.getName()}}&ndash;&gt;-->
+  <!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+<div *ngFor="let key of _keys">
+  {{key}}
+  <div *ngFor="let caseType of _caseTypeList[key]">
+    {{caseType.name}}
+  </div>
+</div>

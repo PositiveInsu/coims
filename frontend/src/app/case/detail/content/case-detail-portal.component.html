@@ -1,0 +1,166 @@
+<div class="view-container">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="view-left">
+        <div class="individual">
+          <h4>Case Information <button type="button" data-toggle="modal" data-target="#caseInfo"><i class="fa fa-question-circle-o" aria-hidden="true"></i></button></h4>
+          <coims-case-detail-icon-info-modal></coims-case-detail-icon-info-modal>
+          <div *ngFor="let clientCase of _caseList; let i = index">
+            <coims-case-detail-case-overview [case]="clientCase" [no]="i"></coims-case-detail-case-overview>
+          </div>
+          <div class="cancelation">
+            <button type="button" class="btn btn-danger">Case Cancelation</button>
+            <p>If you stop this case, </p>
+          </div>
+        </div>
+        <div class="individual">
+          <h4>Related Case</h4>
+          <div class="case-list">
+            <table class="table table-bordered">
+              <caption>Related Case</caption>
+              <colgroup>
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+              </colgroup>
+              <thead>
+              <tr>
+                <th>Case No.</th>
+                <th>Status</th>
+                <th>Last Updated</th>
+                <th>Issued Updated</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>WP-00-010</td>
+                <td>Completed</td>
+                <td>Dec-10-2011</td>
+                <td>Dec-10-2011</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="individual">
+          <h4>Last Counsels</h4>
+          <div class="case-list">
+            <table class="table table-bordered">
+              <caption>Last Counsels</caption>
+              <colgroup>
+                <col width="">
+                <col width="">
+                <col width="">
+                <col width="">
+              </colgroup>
+              <thead>
+              <tr>
+                <th>Type</th>
+                <th>Topic</th>
+                <th>Status</th>
+                <th>Created Date</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr>
+                <td>Case</td>
+                <td>MPNP and Working holiday</td>
+                <td>Completed</td>
+                <td>Dec-10-2011</td>
+              </tr>
+              <tr>
+                <td>Company</td>
+                <td>Company address and fax number</td>
+                <td>Completed</td>
+                <td>Dec-10-2011</td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="view-right">
+        <div class="individual">
+          <h4>Note <button type="button"><i class="fa fa-question-circle-o" aria-hidden="true"></i></button></h4>
+          <textarea class="form-control"></textarea>
+          <div class="form-group font">
+            <label for="exampleInputFile" class="sr-only">File input</label>
+            <input type="file" id="exampleInputFile">
+          </div>
+          <div class="btn-save">
+            <button class="btn btn-primary btn-sm" type="button">Save</button>
+          </div>
+          <div class="last-notes">
+            <ul>
+              <li>
+                <div class="sect-txt">
+                  <div class="top">
+                    <p class="date">Dec-10-2011 00:00<span class=""></span>  <i class="fa fa-share-alt" aria-hidden="true"></i></p>
+                    <div class="dropdown delete">
+                      <button class="dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
+                      </button>
+                      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li><a href="#">modify</a></li>
+                        <li><a href="#">Delete</a></li>
+                        <li><a href="#">Unshare with applicants</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="cont">
+                    Counseled for MPNP immigration and<br>
+                    Scheduled meeting for contract. <br>
+                    Counseled for MPNP immigration and<br>
+                    Scheduled meeting for contract. <br>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">
+                      <span>insu_jo_resume.pdf</span>
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="sect-txt">
+                  <div class="top">
+                    <p class="date">Dec-10-2011 00:00<span class=""></span> </p>
+                    <a href="javascript:void(0);" class="delete"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="cont">
+                    Counseled for MPNP immigration and<br>
+                    Scheduled meeting for contract. <br>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="sect-txt">
+                  <div class="top">
+                    <p class="date">Dec-10-2011 00:00<span class=""></span> </p>
+                    <a href="javascript:void(0);" class="delete"><i class="fa fa-ellipsis-h" aria-hidden="true"></i></a>
+                  </div>
+                  <div class="cont">
+                    Counseled for MPNP immigration and<br>
+                  </div>
+                  <div class="bottom">
+                    <a href="#">
+                      <span>insu_jo_resume.pdf</span>
+                      <i class="fa fa-download" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a href="javascript:;" class="top-btn" id="topBtn">
+  <span class="icon"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+  <span>Top</span>
+</a>

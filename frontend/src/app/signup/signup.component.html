@@ -2,15 +2,16 @@
   <div class="container">
     <div class="form-login signup">
       <div class="header">
-        <h2><img [src]="config.coimsLogoUrl" alt=""></h2>
+        <h2><img [src]="_config.coimsLogoUrl" alt=""></h2>
         <h4>Online Immigration Management System</h4>
       </div>
       <div class="info">
         <div class="signup-top">
           <div class="signup-steps">
-            <progressbar class="progress-striped active" [value]="signupService.progressBarObj.currentStepPercentage" [max]="100"></progressbar>
-            <p class="steps-txt"><strong>Step {{signupService.progressBarObj.currentStep}}</strong> -
-              {{signupService.progressBarObj.currentStepName}}</p>
+            <div class="progress">
+              <div class="progress-bar" role="progressbar" [attr.aria-valuenow]="_signupService.progressBarObj.currentStepPercentage" aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': (_signupService.progressBarObj.currentStepPercentage + '%')}"></div>
+            </div>
+            <p class="steps-txt"><strong>Step {{_signupService.progressBarObj.currentStep}}</strong> - {{_signupService.progressBarObj.currentStepName}}</p>
           </div>
         </div>
         <form name="form">

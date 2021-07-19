@@ -1,0 +1,119 @@
+<div class="member" [ngClass]="{ 'main': _isMainApplicant}">
+  <div class="top">
+    <div class="sect-name">
+      <div class="txt">
+        <span>[{{case.caseType.getCode()}}]</span>
+        <div class="right">
+          <p class="name">
+            <span>{{getUserName( case.user)}}</span>
+            <a href="" data-toggle="modal" (click)="openPersonalInfoModal()">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </a>
+          </p>
+          <coims-case-detail-personal-info-modal [index]="no" [client]="case.user"></coims-case-detail-personal-info-modal>
+          <p class="email">{{case.user.getEmail()}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="sect-btn">
+      <ul>
+        <li *ngIf="_isMainApplicant">
+          <a href="" data-toggle="tooltip" data-placement="top" title="Contract">
+            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li *ngIf="_isMainApplicant">
+          <a href="" data-toggle="tooltip" data-placement="top" title="Payment">
+            <i class="fa fa-usd" aria-hidden="true"></i>
+          </a>
+        </li>
+        <li>
+          <a href="" data-toggle="tooltip" data-placement="top" title="Questionnaire : Completed review">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            <!--<span class="status-notice check"><i class="fa fa-check" aria-hidden="true"></i></span>-->
+          </a>
+        </li>
+        <li>
+          <a href="" data-toggle="tooltip" data-placement="top" title="Documents : Ready for review">
+            <i class="fa fa-files-o" aria-hidden="true"></i>
+            <!--<span class="status-notice exclamation"><i class="fa fa-exclamation" aria-hidden="true"></i></span>-->
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="row">
+      <div class="col-xs-6 col-lg-4">
+        <dl>
+          <dt>UCI No.</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getValueFromData( case.uciNo)}}</p>
+            <label *ngIf="_isModifyMode"><input type="text" id="" class="form-control" value="123123123"></label>
+          </dd>
+        </dl>
+        <dl>
+          <dt>Apply Date</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getDateString( case.appliedDate)}}</p>
+            <p class="input-group" *ngIf="_isModifyMode">
+              <input type="text" class="form-control" value="Dec-12-2011">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-xs-6 col-lg-4">
+        <dl>
+          <dt>Flie No.</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getValueFromData( case.fileNo)}}</p>
+            <label *ngIf="_isModifyMode"><input type="text" id="" class="form-control" value="123123123"></label>
+          </dd>
+        </dl>
+        <dl>
+          <dt>File No. Date</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getDateString( case.fileNoDate)}}</p>
+            <p class="input-group" *ngIf="_isModifyMode">
+              <input type="text" class="form-control">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <div class="col-xs-6 col-lg-4">
+        <dl>
+          <dt>Result</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getValueFromData( case.result)}}</p>
+            <label *ngIf="_isModifyMode"><input type="text" id="" class="form-control" value="Pending"></label>
+          </dd>
+        </dl>
+        <dl>
+          <dt>Result Date</dt>
+          <dd>
+            <p *ngIf="!_isModifyMode">{{getDateString( case.resultDate)}}</p>
+            <p class="input-group" *ngIf="_isModifyMode">
+              <input type="text" class="form-control">
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+          </dd>
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="btn-field">
+    <ul>
+      <li *ngIf="!_isModifyMode"><a (click)="_isModifyMode = true">Modify</a></li>
+      <li *ngIf="_isModifyMode"><a href="javascript:void(0);">Save</a></li>
+      <li *ngIf="_isModifyMode"><a href="javascript:void(0);">Cancel</a></li>
+    </ul>
+  </div>
+</div>

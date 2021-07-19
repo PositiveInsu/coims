@@ -1,0 +1,113 @@
+<div class="modal fade bs-example-modal-sm" id="{{getModalId()}}" tabindex="-1" role="dialog" aria-labelledby="personalInfo">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Personal Information</h4>
+      </div>
+      <div class="modal-body">
+        <dl class="personal-info" *ngIf="!_isModifyMode">
+          <dt>E-mail</dt>
+          <dd>{{getStringValue( client.getEmail())}}</dd>
+          <dt>Name</dt>
+          <dd>{{getClientName()}}</dd>
+          <dt>Phone</dt>
+          <dd>{{getStringValue( client.getPhoneNo())}}</dd>
+          <dt>Date of Birth</dt>
+          <dd>{{getDateString()}}</dd>
+          <dt>Address</dt>
+          <dd>{{getStringValue( client.fullAddress)}}</dd>
+        </dl>
+        <dl class="personal-info" [formGroup]="_personalInfoForm" *ngIf="_isModifyMode">
+          <dt>E-mail <span class="color-danger">*</span></dt>
+          <dd>
+            <div [ngClass]="{ 'has-error': checkHasError( _email)}">
+              <input type="email" id="inputEmail" class="form-control " placeholder="Email address" formControlName="email" (focus)="_email.markAsUntouched()">
+              <div class="notice" *ngIf="checkEmptyValue( _email)">Enter your email address.</div>
+            </div>
+          </dd>
+          <dt>Name</dt>
+          <dd>
+            <div class="row">
+              <div class="col-md-6" [ngClass]="{ 'has-error': checkHasError( _fName)}">
+                <div>First Name <span class="color-danger">*</span></div>
+                <label for="fName" class="sr-only">First Name <span class="color-danger">*</span></label>
+                <input type="text" id="fName" class="form-control " placeholder="First Name" formControlName="fName" (focus)="_fName.markAsUntouched()" (blur)="changeValueToUpperCase( _fName)">
+                <div class="notice" *ngIf="checkEmptyValue( _fName)">Enter your first name.</div>
+              </div>
+              <div class="col-md-6" [ngClass]="{ 'has-error': checkHasError( _lName)}">
+                <div>Last Name <span class="color-danger">*</span></div>
+                <label for="lName" class="sr-only">Last Name <span class="color-danger">*</span></label>
+                <input type="text" id="lName" class="form-control " placeholder="Last Name" formControlName="lName" (focus)="_lName.markAsUntouched()" (blur)="changeValueToUpperCase( _lName)">
+                <div class="notice" *ngIf="checkEmptyValue( _lName)">Enter your last name.</div>
+              </div>
+              <div class="notice" *ngIf="_isNameExist">Your name is exist on that email.</div>
+            </div>
+          </dd>
+          <dt>Phone <span class="color-danger">*</span></dt>
+          <dd>
+            <label>
+              <input type="text" id="inputPhoneNo" class="form-control " placeholder="Phone Number" formControlName="phoneNo">
+            </label>
+          </dd>
+          <dt>Date of Birth</dt>
+          <dd id="birth_date">
+            <div class="col-md-4">
+              <select class="form-control small-select " formControlName="bMonth">
+                <option value="">-</option>
+                <option *ngFor="let month of _monthList" [value]="month.value">{{month.monthName}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select class="form-control small-select " formControlName="bDate">
+                <option value="">-</option>
+                <option *ngFor="let dateValue of getRange( 1, 31)" [value]="dateValue">{{dateValue}}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <select class="form-control small-select " formControlName="bYear">
+                <option value="">-</option>
+                <option *ngFor="let yearValue of getRange( _thisYear, _thisYear - 70)" [value]="yearValue">{{yearValue}}</option>
+              </select>
+            </div>
+          </dd>
+          <dt>Address</dt>
+          <dd class="address">
+            <label for="inputCountry" class="sr-only">Country</label>
+            <select class="form-control input-lg" id="inputCountry" formControlName="country">
+              <option value="">-</option>
+              <option *ngFor="let country of _countryList" [value]="country.code">{{country.name}}</option>
+            </select>
+            <div [ngClass]="{ 'has-error': checkHasError(_street)}">
+              <label for="inputSAddress" class="sr-only">Street Address</label>
+              <input type="text" id="inputSAddress" class="form-control input-lg" placeholder="Street Address (e.g. 108 Avenue)" formControlName="street" (focus)="_street.markAsUntouched()">
+            </div>
+            <div [ngClass]="{ 'has-error': checkHasError(_city)}">
+              <label for="inputCity" class="sr-only">City</label>
+              <input type="text" id="inputCity" class="form-control input-lg" placeholder="Town/City" formControlName="city" (focus)="_city.markAsUntouched()">
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <label class="sr-only">Province</label>
+                <select class="form-control input-lg" id="inputProvince" formControlName="province">
+                  <option value="">-</option>
+                  <option *ngFor="let province of _provinceList" [value]="province.code">{{province.name}}</option>
+                </select>
+              </div>
+              <div class="col-md-6" style="font-size: 10px" [ngClass]="{ 'has-error': checkHasError( _postal)}">
+                <label class="sr-only">Postal Code</label>
+                <input type="text" id="inputPostal" class="form-control input-lg" placeholder="Postal Code" formControlName="postal" (focus)="_postal.markAsUntouched()">
+              </div>
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" *ngIf="!_isModifyMode" (click)="toggleModifyMode( true)">Modify</button>
+        <button type="button" class="btn btn-primary" *ngIf="!_isModifyMode" data-dismiss="modal" >Close</button>
+        <button type="button" class="btn btn-primary" *ngIf="_isModifyMode" [ngClass]="{ 'disabled': !isAllConditionPassed()}" (click)="modifyPersonalDate()">Save</button>
+        <button type="button" class="btn btn-primary" *ngIf="_isModifyMode" data-dismiss="modal" (click)="toggleModifyMode( false)">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

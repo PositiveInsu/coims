@@ -1,0 +1,57 @@
+<div class="col-lg-4">
+  <div class="docs-inner">
+    <div class="webname">
+      <p class="nametype"><i class="fa fa-user-circle" aria-hidden="true"></i>
+        {{getApplicantHeader()}}
+      </p>
+    </div>
+    <div class="more-box" [formGroup]="_moreFormGroup">
+      <h4>More Documents <span>for only this applicant</span></h4>
+      <label for="" class="sr-only">More Documents</label>
+      <input id="" class="form-control" formControlName="docName">
+      <button type="button" class="btn btn-default btn-sm" (click)="addDocument()">Add</button>
+      <ul>
+        <li *ngFor="let document of _moreDocumentList">
+          &#183;	{{document.name}}
+          <a href="javasctipt:void(0)" class="delete" (click)="deleteMoreDoc(document.id)"><i class="fa fa-trash" aria-hidden="true"></i></a>
+        </li>
+      </ul>
+    </div>
+    <div class="doc-list" [formGroup]="_docListFormGroup">
+      <div class="sect-docs">
+        <h3>Supporting Documents</h3>
+        <ul class="doc-list">
+          <li *ngFor="let caseDocument of _supportDocumentList; let i = index">
+            <div>
+              <label>
+                <input type="checkbox" (click)="toggleExceptDocList( caseDocument.getId())" name="docList" value="{{caseDocument.getId()}}" formControlName="{{ getControlName( caseDocument.getId())}}"> {{caseDocument.name}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="sect-docs" *ngIf="_additionalDocumentList.length > 0">
+        <h3>Additional Documents</h3>
+        <ul class="doc-list">
+          <li *ngFor="let caseDocument of _additionalDocumentList">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox" (click)="toggleExceptDocList( caseDocument.getId())" name="docList" value="{{caseDocument.getId()}}" formControlName="{{ getControlName( caseDocument.getId())}}"> {{caseDocument.name}}
+              </label>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+

@@ -1,1 +1,36 @@
-<div>Main Component!</div>
+<div id="wrap">
+  <coims-main-left></coims-main-left>
+  <div class="main-container">
+    <coims-main-header></coims-main-header>
+    <div class="content-wrap">
+      <div class="content">
+        <h2 class="blind">Content</h2>
+        <div class="container-fluid">
+          <div class="cont-section">
+            <div class="management full">
+              <div class="content-title" *ngIf="isBreadcrumbOpen()">
+                <ol class="breadcrumb">
+                  <li *ngFor="let breadCrumb of _mainService.breadCrumbList; let i = index" [ngClass]="{'active': i === _mainService.breadCrumbList.length}">
+                    <span>{{breadCrumb.name}}</span>
+                  </li>
+                </ol>
+                <h2>{{_mainService.breadCrumbList[_mainService.breadCrumbList.length-1].name}}</h2>
+                <div class="overview" [ngClass]="{'on': _isOverviewOpen}">
+                  <div class="content-overview">
+                    <h4>Title</h4>
+                    <div class="txt">
+                      <p>Contents</p>
+                    </div>
+                  </div>
+                  <a (click)="isOverviewOpen=_isOverviewOpen" class="help-btn"><i class="fa fa-question fa-2x" aria-hidden="true"></i></a>
+                </div>
+              </div>
+              <router-outlet></router-outlet>
+            </div>
+          </div>
+        </div>
+        <coims-main-footer></coims-main-footer>
+      </div>
+    </div>
+  </div>
+</div>

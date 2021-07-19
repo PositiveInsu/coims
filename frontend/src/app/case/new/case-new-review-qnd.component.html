@@ -1,0 +1,30 @@
+<table class="table table-bordered information">
+  <caption>Documents and Questionnaire</caption>
+  <colgroup>
+    <col width="">
+  </colgroup>
+  <tr *ngIf="isExistDataOnList( _defaultDocList)">
+    <th>Supporting Documents</th>
+  </tr>
+  <tr *ngIf="isExistDataOnList( _defaultDocList)">
+    <td>
+      <p *ngFor="let caseDocument of _defaultDocList" [ngClass]="{ 'nonchecked': isExceptDocId( caseDocument.getId())}">{{caseDocument.getName()}}</p>
+    </td>
+  </tr>
+  <tr *ngIf="isExistDataOnList( _additionalDocList)">
+    <th>Additional Documents</th>
+  </tr>
+  <tr *ngIf="isExistDataOnList( _additionalDocList)">
+    <td>
+      <p *ngFor="let caseDocument of _additionalDocList" [ngClass]="{ 'nonchecked': isExceptDocId( caseDocument.getId())}">{{caseDocument.getName()}}</p>
+    </td>
+  </tr>
+  <tr *ngIf="isExistDataOnList( _moreDocList)">
+    <th>More Documents</th>
+  </tr>
+  <tr *ngIf="isExistDataOnList( _moreDocList)">
+    <td>
+      <p *ngFor="let caseDocument of _moreDocList">{{caseDocument.getName()}}</p>
+    </td>
+  </tr>
+</table>

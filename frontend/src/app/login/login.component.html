@@ -2,30 +2,19 @@
   <div class="container">
     <div class="form-login">
       <div class="header">
-        <h2><img [src]="config.coimsLogoUrl" alt=""></h2>
+        <h2><img [src]="_config.coimsLogoUrl" alt=""></h2>
         <h4>Online Immigration Management System</h4>
       </div>
-      <form name="form" #loginform="ngForm">
-        <div class="info">
+      <form name="form">
+        <div class="info" [formGroup]="_loginForm">
           <label for="inputEmail" class="sr-only">Email address</label>
-          <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Email address" required="" autofocus="">
+          <input type="email" id="inputEmail" class="form-control input-lg" formControlName="email" placeholder="Email address" required="" autofocus="" name="email">
           <div class="notice" style="display:none">Enter your E-mail</div>
           <label for="inputPassword" class="sr-only">Password</label>
-          <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Password" required="">
-          <div class="notice" style="display:none">The Toy system ID and password do not match. Please try again.</div>
-          <div class="notice" style="display:none">Enter your password</div>
-          <div class="notice" style="display:none">The password is too short.</div>
-          <div class="row checkbox login-checkbox">
-            <div class="col-md-6 ">
-              <label>
-                <input type="checkbox" value="remember-me"> Remember me
-              </label>
-            </div>
-            <div class="col-md-6 text-right">
-              <a href="javascript:void(0);" data-toggle="modal" data-target="#myModal">
-                Forgot ID / Password
-              </a>
-            </div>
+          <input type="password" id="inputPassword" class="form-control input-lg" formControlName="password" placeholder="Password" required="" name="password">
+          <!-- TODO 에러메시지 스타일 강제 부분 수정 요청-->
+          <div class="notice" style="height: 20px;">{{_errorMessage}}</div>
+          <div class="row">
             <div class="modal fade center" id="myModal" tabindex="-1" role="dialog">
               <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -48,8 +37,8 @@
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
           </div>
-          <button class="btn btn-primary btn-block btn-lg" type="submit">Log in</button>
-          <a class="btn btn-default btn-block btn-lg" [routerLink]="['/signup/step1']">Sign up</a>
+          <button class="btn btn-primary btn-block btn-lg" [ngClass]="{ 'disabled': checkAllConditionPassed()}" (click)="login()" type="submit">Log in</button>
+          <a class="btn btn-default btn-block btn-lg" [ngClass]="{ 'disabled': _signupButtonDisable}" [routerLink]="['/signup/step1']">Sign up</a>
         </div>
       </form>
     </div>

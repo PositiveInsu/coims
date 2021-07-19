@@ -1,27 +1,46 @@
 <div [formGroup]="_personalInfoForm">
   <div [ngClass]="{ 'has-error': checkHasError( _fName)}">
     <label for="inputFirstname" class="sr-only">First Name </label>
-    <input type="text" id="inputFirstname" class="form-control input-lg" placeholder="First Name" formControlName="fName" [ngModel]="_consultantObj.fname" (focus)="_fName.markAsUntouched()" autofocus>
+    <input type="text" id="inputFirstname" class="form-control input-lg" placeholder="First Name" formControlName="fName" (focus)="_fName.markAsUntouched()" (blur)="changeValueToUpperCase( _fName)" autofocus>
     <div class="notice" *ngIf="checkEmptyValue( _fName)">Enter your First Name.</div>
-    <div class="notice" *ngIf="_fName.getError('pattern')">Please type only english</div>
+    <div class="notice" *ngIf="_fName.getError('pattern')">Please type only uppercase English</div>
   </div>
   <div [ngClass]="{ 'has-error': checkHasError( _lName)}">
     <label for="inputLastname" class="sr-only">Last Name</label>
-    <input type="text" id="inputLastname" class="form-control input-lg" placeholder="Last Name" formControlName="lName" [ngModel]="_consultantObj.lname" (focus)="_lName.markAsUntouched()">
+    <input type="text" id="inputLastname" class="form-control input-lg" placeholder="Last Name" formControlName="lName" (focus)="_lName.markAsUntouched()" (blur)="changeValueToUpperCase( _lName)" >
     <div class="notice" *ngIf="checkEmptyValue( _lName)">Enter your Last Name.</div>
-    <div class="notice" *ngIf="_lName.getError('pattern')">Please type only English</div>
+    <div class="notice" *ngIf="_lName.getError('pattern')">Please type only uppercase English</div>
   </div>
-  <div [ngClass]="{ 'has-error': checkHasError( _email)}">
+  <div [ngClass]="{ 'has-error': checkHasError( _email) || _isEmailCheckError}">
     <label for="inputEmail" class="sr-only">Email address</label>
-    <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Email address" formControlName="email" [(ngModel)]="_consultantObj.email" (focus)="_email.markAsUntouched()">
-    <div class="notice" *ngIf="checkEmptyValue( _email)">Enter your Email</div>
-    <div class="notice" *ngIf="_email.getError('pattern')">Email format should be <i>jade@abc.com</i>.</div>
+    <div [ngClass]="{ 'form-tooltip': _isOpenEmailTooltip}">
+      <input type="email" id="inputEmail" class="form-control input-lg" placeholder="Email address" formControlName="email" (focus)="_email.markAsUntouched()" (blur)="checkDuplicateEmail()">
+      <div class="notice" *ngIf="checkEmptyValue( _email)">Enter your Email</div>
+      <div class="notice" *ngIf="_email.getError('pattern')">Email format should be <i>jade@abc.com</i>.</div>
+      <div class="tip-box" [ngClass]="{'test-top': _isOpenEmailTooltip}" *ngIf="_isOpenEmailTooltip">
+        <h4 [ngStyle]="{ 'color': _isEmailCheckError? '#a94442': '#33507C'}">{{_checkEmailResultMessage}}</h4>
+        <div class="progress">
+          <div class="progress-bar" [ngClass]="{'progress-bar-danger': _isEmailCheckError, 'progress-bar-striped active': !_isEmailCheckError}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+  <label for="inputPhoneNo" class="sr-only">Phone Number (optional)</label>
+  <input type="text" id="inputPhoneNo" class="form-control input-lg" placeholder="Phone Number (optional)" formControlName="phoneNo">
   <div [ngClass]="{ 'has-error': checkHasError( _password)}">
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Password" formControlName="password" (input)="_consultantObj.password = $event.target.value" (focus)="_password.markAsUntouched()">
-    <div class="notice" *ngIf="checkEmptyValue( _password)">Enter your Password</div>
-    <div class="notice" *ngIf="_password.getError('password')">{{_password.getError('password').message}}</div>
+    <div [ngClass]="{ 'form-tooltip': _password.getError('password')}">
+      <input type="password" id="inputPassword" class="form-control input-lg" placeholder="Password" formControlName="password" (input)="_consultantObj.setPassword( $event.target.value)" (focus)="_password.markAsUntouched()">
+      <div class="notice" *ngIf="checkEmptyValue( _password)">Enter your Password</div>
+      <div class="tip-box" *ngIf="_password.getError('password')">
+        <h4>Password strength: <span>{{_password.getError('password').strength}}</span></h4>
+        <div class="progress {{_password.getError('password').strength | lowercase}}">
+          <div class="progress-bar" role="progressbar" [ngStyle]="{'width': _password.getError('password').percentage}"></div>
+        </div>
+        <p class="txt">{{_password.getError('password').message}}</p>
+      </div>
+    </div>
   </div>
   <div [ngClass]="{ 'has-error': checkHasError( _rePassword)}">
     <label for="inputReenter" class="sr-only">Re-enter Password</label>
@@ -38,7 +57,7 @@
     </label>
   </div>
   <div class="text-center signup-btn">
-    <a class="btn btn-default btn-lg" (click)="signupService.goLoginPage( router)">Back</a>
-    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': _personalInfoForm.valid && _agreement.value? false : true}" (click)="signupService.nextStep( router)">Next</a>
+    <button class="btn btn-default btn-lg" (click)="_signupService.goLoginPage( _router)">Back</button>
+    <button class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !isAllConditionPassed()}" (click)="next()">Next</button>
   </div>
 </div>

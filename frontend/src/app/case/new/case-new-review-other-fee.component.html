@@ -1,0 +1,21 @@
+<div class="col-sm-4" *ngIf="isExistOtherFeeList()">
+  <table class="table table-bordered information fee">
+    <caption>Other Fee</caption>
+    <colgroup>
+      <col width="50%">
+      <col width="50%">
+    </colgroup>
+    <thead>
+    <tr>
+      <th style="font-size: 15px;">{{getName()}}</th>
+      <th class="type" style="font-size: 15px;">{{getCaseType()}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let otherFee of _otherFeeList">
+      <th>{{otherFee.note}}</th>
+      <td>${{otherFee.fee}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

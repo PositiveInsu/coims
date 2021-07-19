@@ -33,11 +33,12 @@ public class HelloController {
 
     @RequestMapping("/user")
     public Principal user(Principal user) {
+        System.out.println( user);
         return user;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/coims")
     public void test(){
-        System.out.println( "login insert!");
+
     }
 }

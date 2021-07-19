@@ -4,15 +4,27 @@
     Only licenced immigration consultants can be use the Toy System. You’ll need to provide your ICCRC Membership ID Number <!--or Law Society Membership ID Number -->before you get a head start by doing it now.
     <a href="#">Learn more</a>
   </p>
-  <div class="verifying-name">Your Name : <span>Sunmi Park</span></div>
+  <div class="verifying-name">Welcome! <span>{{_consultantObj.fName}} {{_consultantObj.lName}}</span></div>
   <div [ngClass]="{ 'has-error': checkHasError(_iccrcNo)}">
     <label for="inputIccrc" class="sr-only">ICCRC Membership ID</label>
-    <input type="email" id="inputIccrc" class="form-control input-lg" formControlName="iccrcNo" [(ngModel)]="_consultantObj.memberId" placeholder="ICCRC ID(e.g. R123456)" (focus)="_iccrcNo.markAsUntouched()" autofocus>
-    <div class="notice" *ngIf="checkEmptyValue(_iccrcNo)">Enter your ICCRC ID No.</div>
-    <div class="notice" *ngIf="_iccrcNo.getError('pattern')">ICCRC Memgership ID format should be <i>R123456</i></div>
+    <div [ngClass]="{ 'form-tooltip': _isOpenMemberIDTooltip}">
+      <input type="text" id="inputIccrc" class="form-control input-lg" formControlName="iccrcNo" placeholder="ICCRC ID(e.g. R123456)" (focus)="initFocusCondition()" (blur)="checkDuplicateMemberID()" autofocus>
+      <div class="notice" *ngIf="checkEmptyValue(_iccrcNo)">Enter your ICCRC ID No.</div>
+      <div class="notice" *ngIf="_iccrcNo.getError('pattern')">ICCRC Memgership ID format should be <i>R123456</i></div>
+      <div class="tip-box" *ngIf="_isOpenMemberIDTooltip">
+        <h4 [ngStyle]="{ 'color': _isMemberIDHasError? '#a94442': '#33507C'}">{{_checkMemberIDResultMessage}}</h4>
+        <div class="progress">
+          <div class="progress-bar" [ngClass]="{ 'progress-bar-danger': _isMemberIDHasError, 'progress-bar-striped active': _isMemberIDHasError}" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="text-center signup-btn">
-    <a class="btn btn-default btn-lg" (click)="signupService.previousStep( _router)">Back</a>
-    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': !_regiNoForm.valid}"  (click)="submitConsultantObj()">Submit</a>
+    <a class="btn btn-default btn-lg" [ngClass]="{ 'disabled': _isSubmit}" (click)="_signupService.previousStep( _router)">Back</a>
+    <a class="btn btn-primary btn-lg" [ngClass]="{ 'disabled': checkAllConditionPassed()}"  (click)="setValueAndSubmit()">Submit</a>
   </div>
 </div>
+
+
+

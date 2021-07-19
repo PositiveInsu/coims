@@ -1,0 +1,37 @@
+<div class="col-sm-4">
+  <table class="table table-bordered information fee">
+    <caption>Consultant Fee</caption>
+    <colgroup>
+      <col width="50%">
+      <col width="">
+    </colgroup>
+    <thead>
+    <tr>
+      <th style="font-size: 15px;">{{getName()}}</th>
+      <th class="type" style="font-size: 15px;">{{getCaseType()}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <th>Basic</th>
+      <td>{{getBasicFee()}}</td>
+    </tr>
+    <tr>
+      <th>Changes <br><span>{{getChangeType()}}</span></th>
+      <td>{{getChangeFee()}}</td>
+    </tr>
+    <tr>
+      <th>Subtotal</th>
+      <td>{{getSubTotal()}}</td>
+    </tr>
+    <tr>
+      <th>Tax( {{getTaxPercentage()}} )</th>
+      <td>{{getTax()}}</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td>{{getTotal()}}</td>
+    </tr>
+    </tbody>
+  </table>
+</div>

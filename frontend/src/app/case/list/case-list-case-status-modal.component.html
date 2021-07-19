@@ -1,0 +1,34 @@
+<div class="modal fade" id="case-list-case-status-modal" tabindex="-1" role="dialog" aria-labelledby="addSupport" data-backdrop="static">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="text-align: center">
+        <h4 class="modal-title" id="myModalLabel">Select Case Status</h4>
+      </div>
+      <div class="modal-body" style="text-align: center">
+        <div [formGroup]="_caseStatusForm">
+          <select class="form-control medium-select" formControlName="category" (change)="selectCaseCategory( $event.target.value)">
+            <option value="">-</option>
+            <option *ngFor="let category of _caseStatusKeyList" [value]="category">{{category}}</option>
+          </select>
+          <select class="form-control medium-select" formControlName="status" *ngIf="_targetStatusList != null" (change)="selectStatus( $event.target.value)">
+            <option value="">-</option>
+            <option *ngFor="let caseStatus of _targetStatusList; let i = index" [value]="i">{{caseStatus.getName()}}</option>
+          </select>
+        </div>
+        <div style="color: #a94442" *ngIf="_isOpenMessage">Please Select Case Status!</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="complete()">Select</button>
+        <button type="button" class="btn btn-default" (click)="cancel()">Not Applicable</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+

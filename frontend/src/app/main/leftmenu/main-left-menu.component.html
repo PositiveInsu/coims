@@ -1,0 +1,100 @@
+<nav class="left-nav" [ngClass]="{ 'visible': _isLeftMenuOpen}">
+  <a (click)="leftMenuHideShow()" class="main_btn">
+    <div class="hamburger" [ngClass]="{ 'on': _isLeftMenuOpen}"><span><p></p><p></p><p></p></span></div>
+  </a>
+  <div class="nav-header">
+    <h1 class="logo"><img src="{{ _config.coimsLogoWhiteUrl}}" alt="COIMS"></h1>
+  </div>
+  <div class="nav-list">
+    <ul>
+      <li [ngClass]="{ 'on': _case.isOn}">
+        <a (click)="selectMenu( _case)">
+          <span class="txt">{{ _case.name}}</span>
+          <span class="icon"><i class="fa fa-address-book-o fa-2x" aria-hidden="true"></i></span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'on': _counsel.isOn}">
+        <a (click)="selectMenu( _counsel)">
+          <span class="txt">{{ _counsel.name}}</span>
+          <span class="icon"><i class="fa fa-comments-o fa-2x" aria-hidden="true"></i></span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'on': _payment.isOn}">
+        <a (click)="selectMenu( _payment)">
+          <span class="txt">{{ _payment.name}}</span>
+          <span class="icon"><i class="fa fa-credit-card fa-2x" aria-hidden="true"></i></span>
+        </a>
+      </li>
+      <li [ngClass]="{ 'on': _adver.isOn}">
+        <a (click)="selectMenu( _adver)">
+          <span class="txt">{{ _adver.name}}</span>
+          <span class="icon"><i class="fa fa-bullhorn fa-2x" aria-hidden="true"></i></span>
+        </a>
+      </li>
+      <li class="depth" [ngClass]="{ 'on': _manage.isOn}" *ngIf="(_manage !== undefined)">
+        <a (click)="selectMenu( _manage)">
+          <span class="txt">{{ _manage.name}}</span>
+          <span class="arrow" [ngClass]="{ 'open': _manage.isOn}"></span>
+          <span class="icon"><i class="fa fa-cog fa-2x" aria-hidden="true"></i></span>
+        </a>
+        <ul [ngClass]="{ 'on': _manage.isOn}">
+          <li [ngClass]="{ 'on': _compinfo.isOn}">
+            <a (click)="selectMenu( _compinfo)">
+              <span class="txt">{{ _compinfo.name}}</span>
+              <span class="icon"><i class="fa fa-building-o" aria-hidden="true"></i></span>
+            </a>
+          </li>
+          <!--<li [ngClass]="{ 'on': _caseType.on}">-->
+            <!--<a (click)="selectMenu( _caseType)">-->
+              <!--<span class="txt">{{ _caseType.name}}</span>-->
+              <!--<span class="icon"><i class="fa fa-archive" aria-hidden="true"></i></span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <li [ngClass]="{ 'on': _fee.isOn}">
+            <a (click)="selectMenu( _fee)">
+              <span class="txt">{{ _fee.name}}</span>
+              <span class="icon"><i class="fa fa-money" aria-hidden="true"></i></span>
+            </a>
+          </li>
+          <!--<li [ngClass]="{ 'on': _question.on}">-->
+            <!--<a (click)="selectMenu( _question)">-->
+              <!--<span class="txt">{{ _question.name}}</span>-->
+              <!--<span class="icon"><i class="fa fa-file-o" aria-hidden="true"></i></span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <li [ngClass]="{ 'on': _documents.isOn}">
+            <a (click)="selectMenu( _documents)">
+              <span class="txt">{{ _documents.name}}</span>
+              <span class="icon"><i class="fa fa-files-o" aria-hidden="true"></i></span>
+            </a>
+          </li>
+          <!--<li [ngClass]="{ 'on': _bill.on}">-->
+            <!--<a (click)="selectMenu( _bill)">-->
+              <!--<span class="txt">{{ _bill.name}}</span>-->
+              <!--<span class="icon"><i class="fa fa-credit-card-alt" aria-hidden="true"></i></span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <!--<li [ngClass]="{ 'on': _bank.on}">-->
+            <!--<a (click)="selectMenu( _bank)">-->
+              <!--<span class="txt">{{ _bank.name}}</span>-->
+              <!--<span class="icon"><i class="fa fa-exchange" aria-hidden="true"></i></span>-->
+            <!--</a>-->
+          <!--</li>-->
+          <li [ngClass]="{ 'on': _staff.isOn}">
+            <a (click)="selectMenu( _staff)">
+              <span class="txt">{{ _staff.name}}</span>
+              <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+            </a>
+          </li>
+          <li [ngClass]="{ 'on': _govFee.isOn}">
+            <a (click)="selectMenu( _govFee)">
+              <span class="txt">{{ _govFee.name}}</span>
+              <span class="icon"><i class="fa fa-usd" aria-hidden="true"></i></span>
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+

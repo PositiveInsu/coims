@@ -1,0 +1,51 @@
+<div class="management middle">
+  <div class="setting-case">
+    <div class="m-select-type">
+      <label for="">Select a type of Case</label>
+      <select id="" class="form-control">
+        <option>Study Permit - Outside</option>
+        <option>Study Permit - Inside</option>
+        <option>Work Permit - Outside</option>
+        <option>Work Permit - Inside</option>
+        <option>Visitor Record</option>
+        <option>Temporary Resident Visa</option>
+        <option>Restoration</option>
+        <option>Transit Visa</option>
+        <option>EE - Federal Worker</option>
+        <option>EE - Federal Trades</option>
+        <option>EE - CEC</option>
+        <option>Sponsorship - Parents/Grandparents</option>
+        <option>Sponsorship - Spouse</option>
+        <option>Sponsorship - Children</option>
+        <option>Sponsorship - Adopted children</option>
+        <option>Sponsorship - Relatives</option>
+        <option>Refugee</option>
+        <option>EoI</option>
+        <option>MPNP</option>
+        <option>MPNP-B</option>
+        <option>Federal</option>
+        <option>LMIA</option>
+        <option>PR Extension</option>
+        <option>Rehabilitation</option>
+        <option>eTA</option>
+        <option>Employer Compliance</option>
+        <option>Citizenship</option>
+      </select>
+    </div>
+    <div class="tab-pricing mobile-none doc">
+      <ul class="row">
+        <li class="col-sm-3 col-xs-6" *ngFor="let key of _categoryKeyList" [ngClass]="key.toLowerCase()">
+          <span class="top">{{key}}</span>
+          <ul class="details">
+            <li *ngFor="let caseType of _caseTypeCategory[key]" [ngClass]="{'active': isActive( caseType.getName())}"><a href="javacript:void(0)" (click)="selectCaseType( caseType)">{{caseType.getName()}}</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <coims-manage-documents-list-content [caseType]="_caseType"></coims-manage-documents-list-content>
+  </div>
+</div>
+<a href="javascript:void(0);" (click)="scrollToTop()" class="top-btn" id="topBtn">
+  <span class="icon"><i class="fa fa-angle-up" aria-hidden="true"></i></span>
+  <span>Top</span>
+</a>

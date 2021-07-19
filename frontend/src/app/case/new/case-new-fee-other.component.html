@@ -1,0 +1,24 @@
+<div [formGroup]="_otherFeeInformation">
+  <div class="changes-note">
+    <div class="row">
+      <div class="col-xs-6">
+        <input type="text" id="" class="form-control" placeholder="Note" formControlName="otherNote" (blur)="changeOtherFee()">
+      </div>
+      <div class="col-xs-4">
+        <span>$</span>
+        <span [ngClass]="{ 'has-error': checkHasError( _otherFeeD)}">
+          <label for="other-dollar" class="sr-only">Dollar</label>
+          <input type="text" id="other-dollar" class="form-control small2" placeholder="00" formControlName="otherFeeD" (blur)="changeOtherFee()">
+        </span>
+        <span>.</span>
+        <span [ngClass]="{ 'has-error': checkHasError( _otherFeeC)}">
+          <label for="other-cents" class="sr-only">Cents</label>
+          <input type="text" id="other-cents" class="form-control small" placeholder="00" formControlName="otherFeeC" (blur)="changeOtherFee()">
+        </span>
+      </div>
+      <div class="col-xs-2">
+        <span class="val" id="total"><b style="color: #D9534F">${{getOtherFee()}}</b></span>
+      </div>
+    </div>
+  </div>
+</div>

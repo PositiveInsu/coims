@@ -1,0 +1,43 @@
+<div class="steps-content">
+  <div class="confirmation-box">
+    <h4>Pricing</h4>
+    <div class="section-pricing">
+      <div class="fee-total">
+        <h5>Consultant Fee</h5>
+        <p class="total">Total ${{_totalConsultantFee}}</p>
+      </div>
+      <div class="row">
+        <coims-case-new-review-consultant-fee *ngFor="let newCaseDto of _newCaseDtoList; let i = index" [applicantCaseDto]="newCaseDto" [index]="i"></coims-case-new-review-consultant-fee>
+      </div>
+    </div>
+    <div class="section-pricing">
+      <div class="fee-total">
+        <h5>Government Fee</h5>
+        <p class="total">Total ${{_totalGovernmentFee}}</p>
+      </div>
+      <div class="row">
+        <coims-case-new-review-gov-fee *ngFor="let newCaseDto of _newCaseDtoList; let i = index" [applicantCaseDto]="newCaseDto" [index]="i"></coims-case-new-review-gov-fee>
+      </div>
+    </div>
+    <div class="section-pricing" *ngIf="isExistOtherFee()">
+      <div class="fee-total">
+        <h5>Other Fee</h5>
+        <p class="total">Total ${{_totalOtherFee}}</p>
+      </div>
+      <div class="row">
+        <coims-case-new-review-other-fee *ngFor="let newCaseDto of _newCaseDtoList; let i = index" [applicantCaseDto]="newCaseDto" [index]="i"></coims-case-new-review-other-fee>
+      </div>
+    </div>
+  </div>
+  <div class="section-pricing">
+    <div class="confirmation-box">
+      <h4>Document Upload</h4>
+      <div class="fee-total">
+        <h5>Agreement</h5>
+      </div>
+      <div class="row">
+        <coims-form-upload *ngIf="_agreementDoc.getId()" [caseId]="_caseList[0].id" [docId]="_agreementDoc.getId()" (fileUploaded)="afterFileUpload($event)"></coims-form-upload>
+      </div>
+    </div>
+  </div>
+</div>

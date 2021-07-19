@@ -3,29 +3,19 @@
  */
 import {Injectable}         from "@angular/core";
 import {SignupProgressBar}  from "../_model/signup-progressbar";
-import {Consultant}         from "../_model/consultant";
+import {User}         from "../_model/user";
 import {Company}            from "../_model/company";
 import {Router}             from "@angular/router";
-import {Http, Headers}      from "@angular/http";
 
 @Injectable()
-export class SignupService{
+export class SignupService {
 
-  private _progressBarObj:SignupProgressBar;
-  private _consultantObj:Consultant;
-  private _signupStepUrl:string = '/signup/step';
-  private _loginPageUrl:string = '/login';
-  private _submitUrl:string = '/p-api';
+  private _progressBarObj: SignupProgressBar;
+  private _consultantObj: User;
+  private _signupStepUrl: string = '/signup/step';
+  private _loginPageUrl: string = '/login';
 
-  constructor( private _http: Http){}
-
-  public submitConsultantObj(){
-    const headers:Headers = new Headers({ "Content-Type" : "application/json"});
-
-    this._http.put( this._submitUrl, JSON.stringify( this._consultantObj), {headers: headers})
-      .map( (res) => console.log(res))
-      .subscribe( ()=>{}, error => console.log(error));
-  }
+  constructor(){}
 
   get progressBarObj():SignupProgressBar{
     if( !this._progressBarObj){
@@ -34,27 +24,36 @@ export class SignupService{
     return this._progressBarObj;
   }
 
-  get newConsultantObj():Consultant{
+  get newConsultantObj():User{
 
     if( !this.isNullConsultantObj()){
       this._consultantObj = null;
     }
 
-    this._consultantObj = new Consultant();
-    this._consultantObj.company = new Company();
-    this._consultantObj.company.country = 'CA';
-    this._consultantObj.company.province = 'MB';
+    this._consultantObj = new User();
+    this._consultantObj.setCompany( this.getNewCompanyObj());
 
     return this._consultantObj;
   }
 
-  get consultantObj(): Consultant{
+  get consultantObj(): User{
     return this._consultantObj;
+  }
+
+  public getNewCompanyObj():Company{
+
+    var companyObj = new Company();
+    companyObj.setCountry( 'CA');
+    companyObj.setProvince( 'MB');
+
+    return companyObj;
   }
 
   public isNullConsultantObj():boolean{
     if( this._consultantObj){
-      return false;
+      if( this._consultantObj.getEmail() != null){
+        return false;
+      }
     }
     return true;
   }
