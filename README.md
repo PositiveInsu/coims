@@ -1,5 +1,9 @@
 ## COIMS( Canada Online Immigration Management System )
 
+This is the toy project for immigration company what I worked.
+For showing how I consider the application, I open this project.
+This is not a complete project.
+
 ### Environment
 AngularJS 2, JAVA(JDK 8.0), JPA, MySQL, Spring Boot, Spring Security, Gradle
 
